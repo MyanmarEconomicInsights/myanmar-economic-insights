@@ -938,5 +938,150 @@
    "source": "Military MOFA via Eleven",
    "note": "military claim"
   }
+ ],
+ "status": [
+  {
+   "board": "trade",
+   "name": "Myawaddy–Mae Sot",
+   "place": "Thailand border",
+   "status": "Reopened",
+   "level": "open",
+   "note": "Unofficial crossings reopened 6 Nov after a 7-day closure",
+   "source": "DVB, 10 Nov",
+   "as_of": "2026-11-10",
+   "sort": 1
+  },
+  {
+   "board": "trade",
+   "name": "Mandalay–Muse road",
+   "place": "China border",
+   "status": "Restricted",
+   "level": "restricted",
+   "note": "Hsipaw bridge still closed; people cross by boat",
+   "source": "Frontier, 15 Oct",
+   "as_of": "2026-10-15",
+   "sort": 2
+  },
+  {
+   "board": "trade",
+   "name": "Namkham–Mong Wee road",
+   "place": "Northern Shan",
+   "status": "Trucks barred",
+   "level": "serious",
+   "note": "TNLA bars large vehicles until 31 Jan",
+   "source": "Frontier, 10 Nov",
+   "as_of": "2026-11-10",
+   "sort": 3
+  },
+  {
+   "board": "trade",
+   "name": "Paletwa–Mizoram",
+   "place": "India border",
+   "status": "New trade point",
+   "level": "open",
+   "note": "AA/ULA MOU for a Ralie–Salachhuah trade point, 29 Oct",
+   "source": "DVB; DMG, 3–4 Nov",
+   "as_of": "2026-11-04",
+   "sort": 4
+  },
+  {
+   "board": "trade",
+   "name": "Kyauktaw–India route",
+   "place": "Rakhine",
+   "status": "Effectively closed",
+   "level": "closed",
+   "note": "Kyauktaw market stopped trading after the 28 Sep airstrike",
+   "source": "DVB, 23 Oct",
+   "as_of": "2026-10-23",
+   "sort": 5
+  },
+  {
+   "board": "trade",
+   "name": "Taungoo–Leiktho road",
+   "place": "Karen",
+   "status": "Army permit needed",
+   "level": "serious",
+   "note": "Rice, fuel, oil and medicine need an LIB 603 letter",
+   "source": "KIC via BNI, 11 Nov",
+   "as_of": "2026-11-11",
+   "sort": 6
+  },
+  {
+   "board": "trade",
+   "name": "Yangon–Mandalay Expressway",
+   "place": "Domestic",
+   "status": "Bus cargo banned",
+   "level": "restricted",
+   "note": "Buses may no longer carry farmers' cargo",
+   "source": "DVB, 3 Nov",
+   "as_of": "2026-11-03",
+   "sort": 7
+  },
+  {
+   "board": "hotspot",
+   "name": "Sittwe",
+   "place": "Rakhine",
+   "status": "Blockade",
+   "level": "closed",
+   "note": "Rice over K200,000 a sack",
+   "source": "DMG, 12 Nov",
+   "as_of": "2026-11-12",
+   "sort": 1
+  },
+  {
+   "board": "hotspot",
+   "name": "Myingyan District",
+   "place": "Mandalay",
+   "status": "Blockade",
+   "level": "closed",
+   "note": "Onions K10,000 a viss, from K1,000–1,500 (single source)",
+   "source": "Mandalay Free Press, 26–27 Oct",
+   "as_of": "2026-10-27",
+   "sort": 2
+  },
+  {
+   "board": "hotspot",
+   "name": "Shwe Kokko",
+   "place": "Karen",
+   "status": "Checkpoint fees",
+   "level": "serious",
+   "note": "At least 100,000 baht per person moved (allegation)",
+   "source": "DVB, 12 Nov",
+   "as_of": "2026-11-12",
+   "sort": 3
+  },
+  {
+   "board": "hotspot",
+   "name": "Kyonpyaw",
+   "place": "Ayeyarwady",
+   "status": "Conscription levy",
+   "level": "serious",
+   "note": "K100,000 per household, up from K20,000 (single source)",
+   "source": "Khit Thit via Frontier, 2 Nov",
+   "as_of": "2026-11-02",
+   "sort": 4
+  },
+  {
+   "board": "hotspot",
+   "name": "Shwebo District",
+   "place": "Sagaing",
+   "status": "Checkpoint taxes",
+   "level": "restricted",
+   "note": "Fertiliser +K30,000 a bag; 12 checkpoints blamed (contested)",
+   "source": "DVB, 11 Nov",
+   "as_of": "2026-11-11",
+   "sort": 5
+  },
+  {
+   "board": "hotspot",
+   "name": "Magway oilfields",
+   "place": "Magway",
+   "status": "Wells destroyed",
+   "level": "serious",
+   "note": "866 small wells and refineries destroyed (military claim)",
+   "source": "DVB, 26 Oct",
+   "as_of": "2026-10-26",
+   "sort": 6
+  }
  ]
 }
