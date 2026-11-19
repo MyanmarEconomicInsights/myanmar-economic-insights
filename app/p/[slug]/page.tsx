@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Markdown from '@/components/Markdown';
 import PostMeta from '@/components/PostMeta';
 import SectionBlock from '@/components/SectionBlock';
+import CategoryTag from '@/components/CategoryTag';
 import { getPost } from '@/lib/data';
 
 export const revalidate = 300;
@@ -21,8 +22,19 @@ export default async function PostPage({ params }: Props) {
       <PostMeta post={post} />
       <h1>{post.title}</h1>
       {post.dek && <p className="dek">{post.dek}</p>}
+      {post.sections.some((s) => s.value) && (
+        <div className="tiles tiles-5" style={{ margin: '14px 0 6px' }}>
+          {post.sections.filter((s) => s.value).map((s) => (
+            <a key={s.category} href={`#${s.category}`} className="tile tile-cat" style={{ borderTopColor: `var(--cat-${s.category})`, textDecoration: 'none' }}>
+              <CategoryTag k={s.category} short />
+              <div className="tile-val">{s.value}</div>
+              <div className="tile-delta">{s.label}</div>
+            </a>
+          ))}
+        </div>
+      )}
       {post.body_md && <Markdown>{post.body_md}</Markdown>}
-      {post.sections.map((s) => <SectionBlock key={s.category} s={s} />)}
+      {post.sections.map((s) => <div key={s.category} id={s.category}><SectionBlock s={s} /></div>)}
       {post.sources.length > 0 && (
         <>
           <p className="section-title" style={{ marginTop: 24 }}>Sources</p>
