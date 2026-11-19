@@ -41,7 +41,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
         <main><div className="wrap">{children}</div></main>
         <footer><div className="wrap">
-          © {new Date().getFullYear()} {SITE_NAME} ({SITE_ALT_NAME}). Every figure is published with a named source and date.
+          <p style={{ margin: '0 0 6px' }}>
+            {SITE_SHORT} is an AI-powered pilot project. Summaries are compiled with AI, with about 20–30% human review and editing.
+            Every figure is published with a named source and date; please check the original source before relying on it.
+          </p>
+          © {new Date().getFullYear()} {SITE_NAME} ({SITE_ALT_NAME}).
         </div></footer>
       </body>
     </html>
