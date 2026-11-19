@@ -61,3 +61,22 @@ create policy "public read published posts" on public.monitor_posts
 drop policy if exists "public read indicators" on public.monitor_indicators;
 create policy "public read indicators" on public.monitor_indicators
   for select using (true);
+
+-- Status boards (trade routes and border gates; economic pressure points)
+create table if not exists public.monitor_status (
+  id       bigserial primary key,
+  board    text not null check (board in ('trade','hotspot')),
+  name     text not null,
+  place    text not null default '',
+  status   text not null,                       -- pill text, e.g. 'Reopened'
+  level    text not null check (level in ('open','restricted','serious','closed')),
+  note     text,
+  source   text not null,
+  as_of    date not null,
+  sort     int not null default 99,
+  updated_at timestamptz not null default now(),
+  unique (board, name)
+);
+alter table public.monitor_status enable row level security;
+drop policy if exists "public read status" on public.monitor_status;
+create policy "public read status" on public.monitor_status for select using (true);

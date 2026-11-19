@@ -77,3 +77,19 @@ insert into public.monitor_indicators (key, category, label, value, unit, locati
   ('checkpoint_fee_person', 'conflict', 'Checkpoint fee per person moved', 100000, 'THB', 'Shwe Kokko', '2026-11-12', 'Residents via DVB', 'allegation; at least'),
   ('scam_repatriated', 'conflict', 'Foreigners repatriated from scam centres', 73085, 'people', '', '2026-10-26', 'Military MOFA via Eleven', 'military claim')
 on conflict (key, location, observed_on) do update set value = excluded.value, label = excluded.label, source = excluded.source, note = excluded.note;
+
+insert into public.monitor_status (board, name, place, status, level, note, source, as_of, sort) values
+  ('trade', 'Myawaddy–Mae Sot', 'Thailand border', 'Reopened', 'open', 'Unofficial crossings reopened 6 Nov after a 7-day closure', 'DVB, 10 Nov', '2026-11-10', 1),
+  ('trade', 'Mandalay–Muse road', 'China border', 'Restricted', 'restricted', 'Hsipaw bridge still closed; people cross by boat', 'Frontier, 15 Oct', '2026-10-15', 2),
+  ('trade', 'Namkham–Mong Wee road', 'Northern Shan', 'Trucks barred', 'serious', 'TNLA bars large vehicles until 31 Jan', 'Frontier, 10 Nov', '2026-11-10', 3),
+  ('trade', 'Paletwa–Mizoram', 'India border', 'New trade point', 'open', 'AA/ULA MOU for a Ralie–Salachhuah trade point, 29 Oct', 'DVB; DMG, 3–4 Nov', '2026-11-04', 4),
+  ('trade', 'Kyauktaw–India route', 'Rakhine', 'Effectively closed', 'closed', 'Kyauktaw market stopped trading after the 28 Sep airstrike', 'DVB, 23 Oct', '2026-10-23', 5),
+  ('trade', 'Taungoo–Leiktho road', 'Karen', 'Army permit needed', 'serious', 'Rice, fuel, oil and medicine need an LIB 603 letter', 'KIC via BNI, 11 Nov', '2026-11-11', 6),
+  ('trade', 'Yangon–Mandalay Expressway', 'Domestic', 'Bus cargo banned', 'restricted', 'Buses may no longer carry farmers'' cargo', 'DVB, 3 Nov', '2026-11-03', 7),
+  ('hotspot', 'Sittwe', 'Rakhine', 'Blockade', 'closed', 'Rice over K200,000 a sack', 'DMG, 12 Nov', '2026-11-12', 1),
+  ('hotspot', 'Myingyan District', 'Mandalay', 'Blockade', 'closed', 'Onions K10,000 a viss, from K1,000–1,500 (single source)', 'Mandalay Free Press, 26–27 Oct', '2026-10-27', 2),
+  ('hotspot', 'Shwe Kokko', 'Karen', 'Checkpoint fees', 'serious', 'At least 100,000 baht per person moved (allegation)', 'DVB, 12 Nov', '2026-11-12', 3),
+  ('hotspot', 'Kyonpyaw', 'Ayeyarwady', 'Conscription levy', 'serious', 'K100,000 per household, up from K20,000 (single source)', 'Khit Thit via Frontier, 2 Nov', '2026-11-02', 4),
+  ('hotspot', 'Shwebo District', 'Sagaing', 'Checkpoint taxes', 'restricted', 'Fertiliser +K30,000 a bag; 12 checkpoints blamed (contested)', 'DVB, 11 Nov', '2026-11-11', 5),
+  ('hotspot', 'Magway oilfields', 'Magway', 'Wells destroyed', 'serious', '866 small wells and refineries destroyed (military claim)', 'DVB, 26 Oct', '2026-10-26', 6)
+on conflict (board, name) do update set place = excluded.place, status = excluded.status, level = excluded.level, note = excluded.note, source = excluded.source, as_of = excluded.as_of, sort = excluded.sort;
