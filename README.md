@@ -60,6 +60,15 @@ curl -X POST https://YOUR-SITE.vercel.app/api/indicators \
 
 Use the same `key` and `location` every day, for example `rice_low_grade` in Mandalay, so each item builds into a time series.
 
+Status boards (trade routes and border gates; economic pressure points) are updated through `/api/status`:
+
+```bash
+curl -X POST https://YOUR-SITE/api/status -H "Authorization: Bearer $POST_SECRET" -H "Content-Type: application/json" \
+  -d '{"items":[{"board":"trade","name":"Myawaddy–Mae Sot","place":"Thailand border","status":"Reopened","level":"open","note":"...","source":"DVB, 10 Nov","as_of":"2026-11-10","sort":1}]}'
+```
+
+`level` is one of `open`, `restricted`, `serious`, `closed` (it sets the pill colour; the pill always shows its text). Remove a row with `{"remove":[{"board":"trade","name":"..."}]}`.
+
 ## Public data access
 
 - `/api/data?format=csv` returns the full dataset as CSV; use `format=json` for JSON.
