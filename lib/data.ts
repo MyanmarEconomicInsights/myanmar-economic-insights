@@ -1,6 +1,6 @@
 import { CATEGORY_ORDER } from './categories';
 import { demoIndicators, demoPosts, demoStatus } from './demo';
-import { HOME_TILES } from './highlights';
+import { HIGHLIGHTS } from './highlights';
 import { hasSupabase, supabaseRead } from './supabase';
 import type { CategoryKey, Indicator, Post, Section, StatusItem } from './types';
 
@@ -140,22 +140,38 @@ export function formatFigure(i: Pick<Indicator, 'value' | 'unit' | 'note'>): { v
   return { value, unit: UNIT_SHORT[i.unit ?? ''] ?? (i.unit ?? '') };
 }
 
-/** Key-indicator tiles: latest value of each configured item, with change since its earliest observation. */
-export async function getTiles(): Promise<Tile[]> {
-  const out: Tile[] = [];
-  for (const t of HOME_TILES) {
-    const series = await getIndicatorSeries(t.key, t.location ?? '');
-    const last = series.at(-1);
-    if (!last) continue;
-    const first = series[0];
-    const f = formatFigure(last);
-    const tile: Tile = { label: t.label, value: f.value, unit: f.unit, date: last.observed_on, source: last.source };
-    if (first && first !== last && first.value) {
-      const pct = ((last.value - first.value) / first.value) * 100;
-      tile.change = { pct, since: first.observed_on, bad: t.upIsBad ? pct > 0 : pct < 0 };
-    } else if (f.rest) tile.sub = f.rest;
-    else if (last.note && !/^(over|K[\d,]+\+)/.test(last.note)) tile.sub = last.note;
-    out.push(tile);
+export interface Highlight {
+  label: string; value: string; date: string; source: string;
+  change?: { pct: number; since: string; bad: boolean }; sub?: string;
+  level?: StatusItem['level'];
+}
+
+/** Key indicators: for each area, its configured highlight figures (latest value, change, source). */
+export async function getHighlights(): Promise<Record<CategoryKey, Highlight[]>> {
+  const out = {} as Record<CategoryKey, Highlight[]>;
+  const boards = { trade: await getStatus('trade'), hotspot: await getStatus('hotspot') };
+  for (const cat of CATEGORY_ORDER) {
+    const items: Highlight[] = [];
+    for (const h of HIGHLIGHTS[cat]) {
+      if (h.kind === 'status') {
+        const s = boards[h.board].find((x) => x.name === h.name);
+        if (s) items.push({ label: s.name, value: s.status, date: '', source: s.source, sub: s.note ?? undefined, level: s.level });
+        continue;
+      }
+      const series = await getIndicatorSeries(h.key, h.location ?? '');
+      const last = series.at(-1);
+      if (!last) continue;
+      const first = series[0];
+      const f = formatFigure(last);
+      const item: Highlight = { label: h.label, value: f.value, date: last.observed_on, source: last.source };
+      if (first && first !== last && first.value) {
+        const pct = ((last.value - first.value) / first.value) * 100;
+        item.change = { pct, since: first.observed_on, bad: h.upIsBad ? pct > 0 : pct < 0 };
+      } else if (f.rest) item.sub = f.rest;
+      else if (last.note && !/^(over|K[\d,]+\+|range)/.test(last.note)) item.sub = last.note;
+      items.push(item);
+    }
+    out[cat] = items.slice(0, 3);
   }
   return out;
 }
