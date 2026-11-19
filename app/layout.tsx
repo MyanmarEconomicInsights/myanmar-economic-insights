@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <header className="masthead">
           <div className="wrap">
-            <Link href="/" className="brand"><b>{SITE_NAME} <em className="short">{SITE_SHORT}</em></b><span>{SITE_TAGLINE}</span></Link>
+            <Link href="/" className="brand"><b>Burma/{SITE_NAME} <em className="short">{SITE_SHORT}</em></b><span>{SITE_TAGLINE}</span></Link>
             <nav>
               <Link href="/daily">Daily</Link>
               <Link href="/weekly">Business Weekly</Link>
