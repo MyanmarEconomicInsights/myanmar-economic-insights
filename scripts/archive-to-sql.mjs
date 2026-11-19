@@ -1,7 +1,7 @@
 // Turns content/archive.json into supabase/archive.sql (run: node scripts/archive-to-sql.mjs).
 // Paste archive.sql into the Supabase SQL Editor after schema.sql to load the past issues.
 import { readFileSync, writeFileSync } from 'node:fs';
-const { posts, indicators } = JSON.parse(readFileSync(new URL('../content/archive.json', import.meta.url), 'utf8'));
+const { posts, indicators, status = [] } = JSON.parse(readFileSync(new URL('../content/archive.json', import.meta.url), 'utf8'));
 const q = (v) => (v === null || v === undefined ? 'null' : `'${String(v).replace(/'/g, "''")}'`);
 let sql = '-- Past Business Weekly issues (generated from content/archive.json). Safe to re-run.\n\n';
 for (const p of posts) {
@@ -13,5 +13,10 @@ for (const p of posts) {
 sql += 'insert into public.monitor_indicators (key, category, label, value, unit, location, observed_on, source, note) values\n';
 sql += indicators.map((i) => `  (${[q(i.key), q(i.category), q(i.label), i.value, q(i.unit), q(i.location), q(i.observed_on), q(i.source), q(i.note)].join(', ')})`).join(',\n');
 sql += '\non conflict (key, location, observed_on) do update set value = excluded.value, label = excluded.label, source = excluded.source, note = excluded.note;\n';
+if (status.length) {
+  sql += '\ninsert into public.monitor_status (board, name, place, status, level, note, source, as_of, sort) values\n';
+  sql += status.map((s) => `  (${[q(s.board), q(s.name), q(s.place), q(s.status), q(s.level), q(s.note), q(s.source), q(s.as_of), s.sort ?? 99].join(', ')})`).join(',\n');
+  sql += '\non conflict (board, name) do update set place = excluded.place, status = excluded.status, level = excluded.level, note = excluded.note, source = excluded.source, as_of = excluded.as_of, sort = excluded.sort;\n';
+}
 writeFileSync(new URL('../supabase/archive.sql', import.meta.url), sql);
 console.log(`wrote supabase/archive.sql: ${posts.length} posts, ${indicators.length} indicators`);
