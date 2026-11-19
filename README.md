@@ -72,6 +72,10 @@ Use the same `key` and `location` every day, for example `rice_low_grade` in Man
 - The public can read published rows only, because row-level security is on.
 - Raw HTML inside posts is ignored when the page is displayed.
 
+## Deployment
+
+Hosted on Vercel; every push to `main` deploys automatically.
+
 ## Local development
 
 ```bash
