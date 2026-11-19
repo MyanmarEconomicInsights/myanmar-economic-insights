@@ -1,7 +1,8 @@
 import { CATEGORY_ORDER } from './categories';
-import { demoIndicators, demoPosts } from './demo';
+import { demoIndicators, demoPosts, demoStatus } from './demo';
+import { HOME_TILES } from './highlights';
 import { hasSupabase, supabaseRead } from './supabase';
-import type { CategoryKey, Indicator, Post, Section } from './types';
+import type { CategoryKey, Indicator, Post, Section, StatusItem } from './types';
 
 const POST_COLS = 'slug,kind,title,dek,body_md,sections,sources,period_start,period_end,published_at';
 const IND_COLS = 'key,category,label,value,unit,location,observed_on,source,source_url,note';
@@ -95,4 +96,83 @@ export async function getAllIndicators(limit = 5000): Promise<Indicator[]> {
     if (!data || data.length < 1000) break;
   }
   return out;
+}
+
+/** Status boards (trade routes, pressure points), ordered for display. */
+export async function getStatus(board: StatusItem['board']): Promise<StatusItem[]> {
+  const db = supabaseRead();
+  let rows: StatusItem[];
+  if (!db) rows = demoStatus.filter((s) => s.board === board);
+  else {
+    const { data, error } = await db.from('monitor_status')
+      .select('board,name,place,status,level,note,source,as_of,sort').eq('board', board);
+    if (error) { console.error('getStatus', error.message); return []; }
+    rows = (data ?? []) as StatusItem[];
+  }
+  return rows.sort((a, b) => (a.sort ?? 99) - (b.sort ?? 99) || a.name.localeCompare(b.name));
+}
+
+export interface Tile {
+  label: string; value: string; unit: string; date: string; source: string;
+  change?: { pct: number; since: string; bad: boolean }; sub?: string;
+}
+
+const UNIT_SHORT: Record<string, string> = {
+  'MMK per USD': '', 'MMK per viss': 'a viss', 'MMK per litre': 'a litre', 'MMK per sack': 'a sack',
+  'MMK per bag': 'a bag', 'MMK per basket': 'a basket', 'MMK per egg': 'each', 'MMK per tical': 'a tical',
+};
+
+/** Compact display of a figure: K4,760 · K10tn · $5.6B · 70% · or the range written in the note. */
+export function formatFigure(i: Pick<Indicator, 'value' | 'unit' | 'note'>): { value: string; unit: string; rest?: string } {
+  const range = i.note?.match(/^range (K[\d,]+[–-][\d,]+)\s*;?\s*(.*)$/);
+  const over = i.note?.match(/^(?:over|K[\d,]+\+)/);
+  const n = i.value.toLocaleString('en-US');
+  let value: string;
+  switch (i.unit) {
+    case 'MMK trillion': value = `K${n}tn`; break;
+    case 'USD billion': value = `$${n}B`; break;
+    case '%': value = `${n}%`; break;
+    case 'THB': value = `${n} baht`; break;
+    default: value = i.unit?.startsWith('MMK') ? `K${n}` : n;
+  }
+  if (range) return { value: range[1], unit: UNIT_SHORT[i.unit ?? ''] ?? '', rest: range[2] || undefined };
+  if (over) value = `>${value}`;
+  return { value, unit: UNIT_SHORT[i.unit ?? ''] ?? (i.unit ?? '') };
+}
+
+/** Key-indicator tiles: latest value of each configured item, with change since its earliest observation. */
+export async function getTiles(): Promise<Tile[]> {
+  const out: Tile[] = [];
+  for (const t of HOME_TILES) {
+    const series = await getIndicatorSeries(t.key, t.location ?? '');
+    const last = series.at(-1);
+    if (!last) continue;
+    const first = series[0];
+    const f = formatFigure(last);
+    const tile: Tile = { label: t.label, value: f.value, unit: f.unit, date: last.observed_on, source: last.source };
+    if (first && first !== last && first.value) {
+      const pct = ((last.value - first.value) / first.value) * 100;
+      tile.change = { pct, since: first.observed_on, bad: t.upIsBad ? pct > 0 : pct < 0 };
+    } else if (f.rest) tile.sub = f.rest;
+    else if (last.note && !/^(over|K[\d,]+\+)/.test(last.note)) tile.sub = last.note;
+    out.push(tile);
+  }
+  return out;
+}
+
+/** One point per ISO week: the last observation of that week (for week-by-week charts). */
+export async function getWeeklySeries(key: string, location = ''): Promise<{ week: string; d: string; v: number }[]> {
+  const s = await getIndicatorSeries(key, location, 400);
+  const byWeek = new Map<string, Indicator>();
+  for (const r of s) byWeek.set(isoWeek(r.observed_on), r);
+  return [...byWeek.entries()].map(([week, r]) => ({ week, d: r.observed_on, v: r.value }));
+}
+
+function isoWeek(d: string): string {
+  const dt = new Date(d + 'T00:00:00Z');
+  const day = (dt.getUTCDay() + 6) % 7;
+  dt.setUTCDate(dt.getUTCDate() - day + 3);
+  const firstThu = new Date(Date.UTC(dt.getUTCFullYear(), 0, 4));
+  const wk = 1 + Math.round(((dt.getTime() - firstThu.getTime()) / 86400000 - 3 + ((firstThu.getUTCDay() + 6) % 7)) / 7);
+  return `W${wk}`;
 }

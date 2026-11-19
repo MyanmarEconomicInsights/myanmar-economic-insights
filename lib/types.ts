@@ -36,3 +36,17 @@ export interface Indicator {
   source_url?: string | null;
   note?: string | null;
 }
+
+/** A row in the status boards (trade routes, pressure points). */
+export type StatusLevel = 'open' | 'restricted' | 'serious' | 'closed';
+export interface StatusItem {
+  board: 'trade' | 'hotspot';
+  name: string;          // e.g. "Myawaddy–Mae Sot"
+  place: string;         // short context, e.g. "Thailand border"
+  status: string;        // pill text, e.g. "Reopened"
+  level: StatusLevel;    // drives the pill colour
+  note?: string | null;  // one short line
+  source: string;        // named source + date
+  as_of: string;         // YYYY-MM-DD
+  sort?: number;
+}
