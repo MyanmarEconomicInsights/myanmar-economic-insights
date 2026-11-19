@@ -1,1 +1,942 @@
-x
+{
+ "posts": [
+  {
+   "slug": "business-weekly-issue-11",
+   "kind": "weekly",
+   "title": "Issue 11: Pump prices double in the delta as the military seeks a record defence budget",
+   "dek": "6–12 Nov 2026. Petrol doubles in Ayeyarwady, a K10 trillion defence request, and two street-rate trackers that no longer agree.",
+   "body_md": "First published on the [Burma/Myanmar Economics Monitor Facebook page](https://www.facebook.com/profile.php?id=61588989971929).",
+   "sections": [
+    {
+     "category": "prices",
+     "value": "K10,000–15,000",
+     "label": "Petrol per litre in nine Ayeyarwady townships, from K5,500–7,500 in October",
+     "source": "DVB, 11 Nov",
+     "text_md": "- **Why:** a station owner says the energy ministry cut monthly fuel quotas, pushing drivers onto the black market.\n- **Sittwe:** rice over K200,000 a sack, cooking oil K18,000–25,500 a litre, onions up to K15,000 a viss (DMG, 12 Nov).\n- **Yangon list rate**, unchanged all week: Octane 92 K4,530, diesel K4,555 a litre (Irrawaddy list, 10–12 Nov)."
+    },
+    {
+     "category": "trade",
+     "value": "Permit",
+     "label": "Army letter now needed to move rice, fuel, oil and medicine on the Taungoo–Leiktho road",
+     "source": "KIC via BNI, 11 Nov",
+     "text_md": "- Loads without the LIB 603 commander's letter are confiscated; a bag of rice in Leiktho has nearly doubled.\n- Thailand reopened the unofficial Myawaddy–Mae Sot crossings on 6 Nov after a seven-day closure (DVB, 10 Nov).\n- TNLA has barred large trucks on the Namkham–Mong Wee road until 31 Jan (Frontier, 10 Nov; armed-group claim)."
+    },
+    {
+     "category": "business",
+     "value": "~70%",
+     "label": "Share of hot-season power demand that generation will meet; cuts continue through 2027",
+     "source": "Deputy energy minister via Frontier, 13 Nov",
+     "text_md": "- Demand forecast 5,010 MW against 3,540 MW of generation.\n- Unilever is reported to be handing its Myanmar companies to local owners (Khit Thit via BCRN, 7 Nov; single source, unconfirmed).\n- Karenni IEC offers interest-free microloans to 50 small businesses (DVB, 6 Nov)."
+    },
+    {
+     "category": "money",
+     "value": "K4,760 / K4,880",
+     "label": "Street rate per US$ on 12 Nov — two trackers, same day",
+     "source": "DVB; Irrawaddy list",
+     "text_md": "- The two series disagree in level and direction after 9 Nov, so treat the level as uncertain.\n- Defence request for 2026–27 is over K10 trillion, against K7.95 trillion first allocated this year (Than Lwin Times via BNI, 12 Nov).\n- Cash withdrawals capped at K10M a week per person; exporters may now hold FX 45 days, up from 30 (BBC Burmese; Eleven, 10 Nov)."
+    },
+    {
+     "category": "conflict",
+     "value": "100,000 baht",
+     "label": "≈US$3,000 taken per Chinese national at three checkpoints out of Shwe Kokko",
+     "source": "Residents via DVB, 12 Nov (allegation)",
+     "text_md": "- Troops reportedly charge 10,000–100,000 baht a vehicle for scam-centre traffic at nine Mon/Karen checkpoints (KIC via BNI, 12 Nov).\n- Arakan fertiliser now K280,000–400,000 a sack, from under K100,000 (DMG, 12 Nov).\n- Myothit villages pay a K20,000 monthly \"conscription fee\" per household (Myaelatt Athan, 11 Nov; single source)."
+    }
+   ],
+   "sources": [
+    {
+     "name": "DVB",
+     "date": "6–13 Nov 2026"
+    },
+    {
+     "name": "Frontier Myanmar",
+     "date": "6–13 Nov 2026"
+    },
+    {
+     "name": "DMG",
+     "date": "12 Nov 2026"
+    },
+    {
+     "name": "BNI / KIC / Than Lwin Times",
+     "date": "11–12 Nov 2026"
+    },
+    {
+     "name": "Irrawaddy daily list",
+     "date": "10–12 Nov 2026"
+    },
+    {
+     "name": "Eleven Media",
+     "date": "10 Nov 2026"
+    },
+    {
+     "name": "Burma/Myanmar Economics Monitor (Facebook)",
+     "url": "https://www.facebook.com/profile.php?id=61588989971929"
+    }
+   ],
+   "period_start": "2026-11-06",
+   "period_end": "2026-11-12",
+   "published_at": "2026-11-13T13:00:00Z"
+  },
+  {
+   "slug": "business-weekly-issue-10",
+   "kind": "weekly",
+   "title": "Issue 10: The kyat slides past K4,900 as blockades lift dry-zone prices several-fold",
+   "dek": "28 Oct – 5 Nov 2026. The military tightens its grip on foreign exchange; Myingyan and Manaung run short of food.",
+   "body_md": "First published on the [Burma/Myanmar Economics Monitor Facebook page](https://www.facebook.com/profile.php?id=61588989971929).",
+   "sections": [
+    {
+     "category": "prices",
+     "value": "K10,000",
+     "label": "Onions per viss in blockaded Myingyan District, from K1,000–1,500",
+     "source": "Mandalay Free Press / Taungtha News, 26–27 Oct (single source)",
+     "text_md": "- Coarse rice ~K250,000 a sack (was ~K100,000+); eggs K600+ each.\n- **Why:** since early September villagers have been barred from buying in town, with heavy gate fees on the Myingyan–Myothit road.\n- Manaung Island (Rakhine): rice over K120,000 a basket (Narinjara via BNI, 30 Oct)."
+    },
+    {
+     "category": "trade",
+     "value": "7 days",
+     "label": "Thailand's closure of unofficial Myawaddy–Mae Sot crossings, from 30 Oct",
+     "source": "DVB, 2 Nov",
+     "text_md": "- The AA/ULA signed an MOU for a Paletwa–Mizoram trade point on 29 Oct, suspended since 14 Sep (DVB; DMG).\n- Buses on the Yangon–Mandalay Expressway can no longer carry cargo, closing a cheap route for farmers (DVB, 3 Nov)."
+    },
+    {
+     "category": "business",
+     "value": "US$1.34B",
+     "label": "Japan–Myanmar trade in FY2025-26, as Japan lobbies FATF to delist Myanmar",
+     "source": "MOI via Frontier, 2 Nov (military figure)",
+     "text_md": "- The US Integrated Country Strategy targets at least three deals of ~US$5M and links peace talks to rare earths (Reuters via DVB, 4 Nov).\n- MNDAA reportedly offers land and residency to Chinese investors putting in ¥500,000+ (single source)."
+    },
+    {
+     "category": "money",
+     "value": "K4,910",
+     "label": "Street rate per US$ on 5 Nov, up 4.8% from K4,685 on 28 Oct",
+     "source": "DVB",
+     "text_md": "- The central bank says it sold US$2.22B of FX from April to 5 Nov, US$1.70B for fuel, edible oil and fertiliser, and threatened unlicensed dealers (CBM via Eleven, 6 Nov).\n- FATF kept Myanmar on its blacklist on 30 Oct; review in Feb 2027 (Frontier, 2 Nov)."
+    },
+    {
+     "category": "conflict",
+     "value": "K100,000",
+     "label": "Conscription levy per household in Kyonpyaw, up from K20,000",
+     "source": "Khit Thit via Frontier, 2 Nov (single source)",
+     "text_md": "- Villages pay K10M if they send no conscripts.\n- Gate fees on the Myingyan–Myothit road; drone strikes on Karenni farmers during harvest (DVB, 29 Oct)."
+    }
+   ],
+   "sources": [
+    {
+     "name": "DVB",
+     "date": "28 Oct – 5 Nov 2026"
+    },
+    {
+     "name": "Frontier Myanmar",
+     "date": "2–5 Nov 2026"
+    },
+    {
+     "name": "Eleven Media",
+     "date": "6 Nov 2026"
+    },
+    {
+     "name": "Narinjara via BNI",
+     "date": "30 Oct 2026"
+    },
+    {
+     "name": "Burma/Myanmar Economics Monitor (Facebook)",
+     "url": "https://www.facebook.com/profile.php?id=61588989971929"
+    }
+   ],
+   "period_start": "2026-10-28",
+   "period_end": "2026-11-05",
+   "published_at": "2026-11-06T14:00:00Z"
+  },
+  {
+   "slug": "business-weekly-issue-9",
+   "kind": "weekly",
+   "title": "Issue 9: A weak kyat and import curbs push up household costs as fighting chokes Rakhine and Muse trade",
+   "dek": "15–27 Oct 2026. Cooking gas up 50% in a week, palm-oil permits cut, and the kyat past K4,700.",
+   "body_md": "First published on the [Burma/Myanmar Economics Monitor Facebook page](https://www.facebook.com/profile.php?id=61588989971929).",
+   "sections": [
+    {
+     "category": "prices",
+     "value": "+50%",
+     "label": "Yangon cooking gas (LPG), K12,000 → K18,000 a viss in one week",
+     "source": "BBC Burmese via Frontier, 15 Oct",
+     "text_md": "- **Why:** about 90% of LPG is imported and paying for it needs scarce dollars.\n- Octane 92 is K4,965/L in Mon State; importers there buy dollars at the street rate (BNI/IMNA, 23 Oct)."
+    },
+    {
+     "category": "trade",
+     "value": "–30%",
+     "label": "Palm-oil import permits cut, so Yangon cooking oil keeps rising",
+     "source": "DVB, 23 Oct",
+     "text_md": "- The Rakhine–India route is effectively closed: Kyauktaw's market stopped trading and Paletwa's cargo jetty was hit on 18–19 Oct.\n- Mandalay–Muse road restricted: the Hsipaw bridge is still closed (Frontier, 15 Oct)."
+    },
+    {
+     "category": "business",
+     "value": "866",
+     "label": "Small Magway oil wells and refineries destroyed, wiping out village incomes",
+     "source": "Military claim via DVB, 26 Oct",
+     "text_md": "- Yangon luxury-condo projects have stalled (Myanmar Now, 21 Oct).\n- Fishing workers in southern Rakhine are about 80% jobless (BNI, 22 Oct)."
+    },
+    {
+     "category": "money",
+     "value": "K4,680",
+     "label": "Street rate per US$ on 27 Oct, against the official K2,100",
+     "source": "DVB; Frontier, 16 Oct",
+     "text_md": "- Parliament approved K2.1 trillion in central-bank borrowing on 14 Oct.\n- Remittances: US$5.6B in 2025 is the only sourced figure (Myanmar Now, 19 Oct). The \"$7–8B a year\" claim has no source."
+    },
+    {
+     "category": "conflict",
+     "value": "–70%",
+     "label": "Drop in Kyauktaw market sales since the 28 Sep airstrike",
+     "source": "DVB, 16 Oct",
+     "text_md": "- Only 662 of 14,730 detained after the KK Park raid were prosecuted (DVB, 22 Oct).\n- The SSPP collects conscription money twice a month, K40,000–100,000 each time (Frontier, 23 Oct)."
+    }
+   ],
+   "sources": [
+    {
+     "name": "DVB",
+     "date": "15–27 Oct 2026"
+    },
+    {
+     "name": "Frontier Myanmar",
+     "date": "15–25 Oct 2026"
+    },
+    {
+     "name": "Myanmar Now",
+     "date": "19–21 Oct 2026"
+    },
+    {
+     "name": "BNI / IMNA",
+     "date": "22–24 Oct 2026"
+    },
+    {
+     "name": "Burma/Myanmar Economics Monitor (Facebook)",
+     "url": "https://www.facebook.com/profile.php?id=61588989971929"
+    }
+   ],
+   "period_start": "2026-10-15",
+   "period_end": "2026-10-27",
+   "published_at": "2026-10-28T14:00:00Z"
+  },
+  {
+   "slug": "business-weekly-issue-8",
+   "kind": "weekly",
+   "title": "Issue 8: Onion and egg prices jump in Rakhine and Mon as gold trades far above the reference price",
+   "dek": "3–14 Oct 2026. Archive summary of Issue 8.",
+   "body_md": "First published on the [Burma/Myanmar Economics Monitor Facebook page](https://www.facebook.com/profile.php?id=61588989971929).",
+   "sections": [
+    {
+     "category": "prices",
+     "value": "K15,000",
+     "label": "Onions per viss in Rakhine, up from K10,000",
+     "source": "DVB, 14 Oct",
+     "text_md": "- Mon onions K10,000 a viss, from K7,000 in mid-September (IMNA, 5 Oct).\n- Rakhine eggs K700 each, from K500 (DVB, 14 Oct)."
+    },
+    {
+     "category": "business",
+     "value": "~K900,000",
+     "label": "Price of a Jinko solar panel, up from K550,000 in August",
+     "source": "Eleven, 11 Oct",
+     "text_md": "- Solar batteries rose from K7.2M to K9.2M as households and shops buy their way around blackouts."
+    },
+    {
+     "category": "money",
+     "value": ">K10M",
+     "label": "Market price of a tical of 24K gold, against the YGEA reference of K7.1M",
+     "source": "Irrawaddy, 9 Oct",
+     "text_md": "- Remittances: 25% must go through official banks, plus a 2% income tax; workers must show proof to leave (Labour Ministry, 4 Oct)."
+    },
+    {
+     "category": "conflict",
+     "value": "US$1.8B",
+     "label": "Scam takings by the Wei clan, sentenced in China",
+     "source": "13 Oct",
+     "text_md": "- Three death sentences, three life terms and 55 jailed."
+    }
+   ],
+   "sources": [
+    {
+     "name": "DVB",
+     "date": "14 Oct 2026"
+    },
+    {
+     "name": "IMNA",
+     "date": "5 Oct 2026"
+    },
+    {
+     "name": "Eleven Media",
+     "date": "11 Oct 2026"
+    },
+    {
+     "name": "The Irrawaddy",
+     "date": "9 Oct 2026"
+    },
+    {
+     "name": "Burma/Myanmar Economics Monitor (Facebook)",
+     "url": "https://www.facebook.com/profile.php?id=61588989971929"
+    }
+   ],
+   "period_start": "2026-10-03",
+   "period_end": "2026-10-14",
+   "published_at": "2026-10-14T14:00:00Z"
+  }
+ ],
+ "indicators": [
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4550,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-15",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4680,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-27",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4685,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-28",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4685,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-29",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4710,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-30",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4750,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-02",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4780,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-03",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4800,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-04",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4910,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-05",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4850,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-06",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4740,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-09",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4740,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-10",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4760,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-11",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street",
+   "category": "money",
+   "label": "Street rate (DVB)",
+   "value": 4760,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-12",
+   "source": "DVB daily rate"
+  },
+  {
+   "key": "mmk_usd_street_mmp",
+   "category": "money",
+   "label": "Street rate (Myanmar Market Price app)",
+   "value": 4480,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-01",
+   "source": "Myanmar Market Price app via Frontier"
+  },
+  {
+   "key": "mmk_usd_street_mmp",
+   "category": "money",
+   "label": "Street rate (Myanmar Market Price app)",
+   "value": 4550,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-13",
+   "source": "Myanmar Market Price app via Frontier"
+  },
+  {
+   "key": "mmk_usd_street_mmp",
+   "category": "money",
+   "label": "Street rate (Myanmar Market Price app)",
+   "value": 4600,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-14",
+   "source": "Myanmar Market Price app via Frontier"
+  },
+  {
+   "key": "mmk_usd_street_mmp",
+   "category": "money",
+   "label": "Street rate (Myanmar Market Price app)",
+   "value": 4750,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-15",
+   "source": "Myanmar Market Price app via Frontier",
+   "note": "afternoon peak"
+  },
+  {
+   "key": "mmk_usd_street_mmp",
+   "category": "money",
+   "label": "Street rate (Myanmar Market Price app)",
+   "value": 4630,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-16",
+   "source": "Myanmar Market Price app via Frontier",
+   "note": "morning"
+  },
+  {
+   "key": "mmk_usd_street_irrawaddy",
+   "category": "money",
+   "label": "Street rate (Irrawaddy list)",
+   "value": 4700,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-10",
+   "source": "Irrawaddy daily list",
+   "note": "approximate"
+  },
+  {
+   "key": "mmk_usd_street_irrawaddy",
+   "category": "money",
+   "label": "Street rate (Irrawaddy list)",
+   "value": 4800,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-11",
+   "source": "Irrawaddy daily list",
+   "note": "approximate"
+  },
+  {
+   "key": "mmk_usd_street_irrawaddy",
+   "category": "money",
+   "label": "Street rate (Irrawaddy list)",
+   "value": 4880,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-11-12",
+   "source": "Irrawaddy daily list",
+   "note": "approximate"
+  },
+  {
+   "key": "mmk_usd_official",
+   "category": "money",
+   "label": "Official reference rate",
+   "value": 2100,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-16",
+   "source": "Central Bank of Myanmar via Frontier"
+  },
+  {
+   "key": "mmk_usd_cbm_trading",
+   "category": "money",
+   "label": "CBM market trading rate",
+   "value": 3660,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-16",
+   "source": "Central Bank of Myanmar via Frontier"
+  },
+  {
+   "key": "mmk_usd_remittance_cbbank",
+   "category": "money",
+   "label": "Remittance rate (CB Bank)",
+   "value": 3985,
+   "unit": "MMK per USD",
+   "location": "",
+   "observed_on": "2026-10-19",
+   "source": "Myanmar Now"
+  },
+  {
+   "key": "remittances_total",
+   "category": "money",
+   "label": "Remittances sent home, 2025",
+   "value": 5.6,
+   "unit": "USD billion",
+   "location": "",
+   "observed_on": "2026-10-15",
+   "source": "Labour Ministry via Myanmar Now",
+   "note": "regime figure; total remitted, not regime income"
+  },
+  {
+   "key": "cbm_borrowing",
+   "category": "money",
+   "label": "Central-bank borrowing approved",
+   "value": 2.1,
+   "unit": "MMK trillion",
+   "location": "",
+   "observed_on": "2026-10-14",
+   "source": "Frontier"
+  },
+  {
+   "key": "cbm_fx_sold",
+   "category": "money",
+   "label": "FX sold by CBM, Apr–5 Nov",
+   "value": 2.2212,
+   "unit": "USD billion",
+   "location": "",
+   "observed_on": "2026-11-05",
+   "source": "CBM via Eleven",
+   "note": "official claim; US$1.703B for fuel, edible oil, fertiliser"
+  },
+  {
+   "key": "cash_withdrawal_cap",
+   "category": "money",
+   "label": "Cash withdrawal cap",
+   "value": 10000000,
+   "unit": "MMK per week per person",
+   "location": "",
+   "observed_on": "2026-11-10",
+   "source": "BBC Burmese",
+   "note": "deputy governor to parliament"
+  },
+  {
+   "key": "defence_budget_request",
+   "category": "money",
+   "label": "Defence budget request 2026–27",
+   "value": 10,
+   "unit": "MMK trillion",
+   "location": "",
+   "observed_on": "2026-11-12",
+   "source": "Than Lwin Times via BNI",
+   "note": "over K10tn"
+  },
+  {
+   "key": "gold_24k_market",
+   "category": "money",
+   "label": "Gold 24K, market",
+   "value": 10000000,
+   "unit": "MMK per tical",
+   "location": "Yangon",
+   "observed_on": "2026-10-09",
+   "source": "The Irrawaddy",
+   "note": "over K10M"
+  },
+  {
+   "key": "gold_24k_ygea",
+   "category": "money",
+   "label": "Gold 24K, YGEA reference",
+   "value": 7100000,
+   "unit": "MMK per tical",
+   "location": "Yangon",
+   "observed_on": "2026-10-09",
+   "source": "The Irrawaddy"
+  },
+  {
+   "key": "lpg",
+   "category": "prices",
+   "label": "LPG (cooking gas)",
+   "value": 18000,
+   "unit": "MMK per viss",
+   "location": "Yangon",
+   "observed_on": "2026-10-15",
+   "source": "BBC Burmese via Frontier",
+   "note": "from K12,000 a week earlier"
+  },
+  {
+   "key": "palm_oil",
+   "category": "prices",
+   "label": "Palm oil",
+   "value": 12000,
+   "unit": "MMK per viss",
+   "location": "Yangon",
+   "observed_on": "2026-10-23",
+   "source": "DVB",
+   "note": "K12,000+"
+  },
+  {
+   "key": "palm_oil",
+   "category": "prices",
+   "label": "Palm oil",
+   "value": 20000,
+   "unit": "MMK per viss",
+   "location": "Yangon",
+   "observed_on": "2026-11-12",
+   "source": "Irrawaddy daily list",
+   "note": "K20,000+"
+  },
+  {
+   "key": "octane_92",
+   "category": "prices",
+   "label": "Petrol, Octane 92",
+   "value": 4965,
+   "unit": "MMK per litre",
+   "location": "Mon",
+   "observed_on": "2026-10-20",
+   "source": "BNI/IMNA"
+  },
+  {
+   "key": "octane_95",
+   "category": "prices",
+   "label": "Petrol, Octane 95",
+   "value": 5115,
+   "unit": "MMK per litre",
+   "location": "Mon",
+   "observed_on": "2026-10-20",
+   "source": "BNI/IMNA"
+  },
+  {
+   "key": "octane_92",
+   "category": "prices",
+   "label": "Petrol, Octane 92",
+   "value": 4530,
+   "unit": "MMK per litre",
+   "location": "Yangon",
+   "observed_on": "2026-11-12",
+   "source": "Irrawaddy daily list"
+  },
+  {
+   "key": "octane_95",
+   "category": "prices",
+   "label": "Petrol, Octane 95",
+   "value": 4550,
+   "unit": "MMK per litre",
+   "location": "Yangon",
+   "observed_on": "2026-11-12",
+   "source": "Irrawaddy daily list"
+  },
+  {
+   "key": "diesel",
+   "category": "prices",
+   "label": "Diesel",
+   "value": 4555,
+   "unit": "MMK per litre",
+   "location": "Yangon",
+   "observed_on": "2026-11-12",
+   "source": "Irrawaddy daily list"
+  },
+  {
+   "key": "premium_diesel",
+   "category": "prices",
+   "label": "Premium diesel",
+   "value": 5420,
+   "unit": "MMK per litre",
+   "location": "Yangon",
+   "observed_on": "2026-11-12",
+   "source": "Irrawaddy daily list"
+  },
+  {
+   "key": "petrol_local",
+   "category": "prices",
+   "label": "Petrol, local market",
+   "value": 10000,
+   "unit": "MMK per litre",
+   "location": "Ayeyarwady",
+   "observed_on": "2026-11-11",
+   "source": "DVB",
+   "note": "range K10,000–15,000; was K5,500–7,500 in Oct"
+  },
+  {
+   "key": "rice_coarse",
+   "category": "prices",
+   "label": "Rice, coarse",
+   "value": 72000,
+   "unit": "MMK per sack",
+   "location": "Yangon",
+   "observed_on": "2026-11-12",
+   "source": "Irrawaddy daily list",
+   "note": "range K72,000–85,000"
+  },
+  {
+   "key": "rice",
+   "category": "prices",
+   "label": "Rice",
+   "value": 200000,
+   "unit": "MMK per sack",
+   "location": "Sittwe",
+   "observed_on": "2026-11-12",
+   "source": "DMG",
+   "note": "over K200,000"
+  },
+  {
+   "key": "rice_coarse",
+   "category": "prices",
+   "label": "Rice, coarse",
+   "value": 250000,
+   "unit": "MMK per sack",
+   "location": "Myingyan",
+   "observed_on": "2026-10-27",
+   "source": "Mandalay Free Press",
+   "note": "approx.; single source"
+  },
+  {
+   "key": "rice_basket",
+   "category": "prices",
+   "label": "Rice",
+   "value": 120000,
+   "unit": "MMK per basket",
+   "location": "Manaung",
+   "observed_on": "2026-10-30",
+   "source": "Narinjara via BNI",
+   "note": "K120,000+"
+  },
+  {
+   "key": "rice_low_grade",
+   "category": "prices",
+   "label": "Rice, low grade",
+   "value": 100000,
+   "unit": "MMK per bag",
+   "location": "Ayeyarwady",
+   "observed_on": "2026-10-21",
+   "source": "DVB"
+  },
+  {
+   "key": "onions",
+   "category": "prices",
+   "label": "Onions",
+   "value": 10000,
+   "unit": "MMK per viss",
+   "location": "Mon",
+   "observed_on": "2026-10-05",
+   "source": "IMNA"
+  },
+  {
+   "key": "onions",
+   "category": "prices",
+   "label": "Onions",
+   "value": 15000,
+   "unit": "MMK per viss",
+   "location": "Rakhine",
+   "observed_on": "2026-10-14",
+   "source": "DVB"
+  },
+  {
+   "key": "onions",
+   "category": "prices",
+   "label": "Onions",
+   "value": 10000,
+   "unit": "MMK per viss",
+   "location": "Myingyan",
+   "observed_on": "2026-10-27",
+   "source": "Mandalay Free Press",
+   "note": "approx.; single source"
+  },
+  {
+   "key": "onions",
+   "category": "prices",
+   "label": "Onions",
+   "value": 15000,
+   "unit": "MMK per viss",
+   "location": "Sittwe",
+   "observed_on": "2026-11-12",
+   "source": "DMG",
+   "note": "up to K15,000"
+  },
+  {
+   "key": "eggs",
+   "category": "prices",
+   "label": "Eggs",
+   "value": 700,
+   "unit": "MMK per egg",
+   "location": "Rakhine",
+   "observed_on": "2026-10-14",
+   "source": "DVB"
+  },
+  {
+   "key": "eggs",
+   "category": "prices",
+   "label": "Eggs",
+   "value": 600,
+   "unit": "MMK per egg",
+   "location": "Myingyan",
+   "observed_on": "2026-10-27",
+   "source": "Mandalay Free Press",
+   "note": "K600+; single source"
+  },
+  {
+   "key": "cooking_oil",
+   "category": "prices",
+   "label": "Cooking oil",
+   "value": 18000,
+   "unit": "MMK per litre",
+   "location": "Sittwe",
+   "observed_on": "2026-11-12",
+   "source": "DMG",
+   "note": "range K18,000–25,500"
+  },
+  {
+   "key": "fertiliser",
+   "category": "prices",
+   "label": "Fertiliser",
+   "value": 280000,
+   "unit": "MMK per sack",
+   "location": "Rakhine",
+   "observed_on": "2026-11-12",
+   "source": "DMG",
+   "note": "range K280,000–400,000; was under K100,000"
+  },
+  {
+   "key": "palm_oil_permits",
+   "category": "trade",
+   "label": "Palm-oil import permits, change",
+   "value": -30,
+   "unit": "%",
+   "location": "",
+   "observed_on": "2026-10-23",
+   "source": "DVB"
+  },
+  {
+   "key": "power_demand_met",
+   "category": "business",
+   "label": "Hot-season power demand met",
+   "value": 70,
+   "unit": "%",
+   "location": "",
+   "observed_on": "2026-11-11",
+   "source": "Deputy energy minister via Frontier",
+   "note": "5,010 MW demand vs 3,540 MW generation"
+  },
+  {
+   "key": "oil_wells_destroyed",
+   "category": "business",
+   "label": "Small oil wells/refineries destroyed",
+   "value": 866,
+   "unit": "count",
+   "location": "Magway",
+   "observed_on": "2026-10-26",
+   "source": "DVB",
+   "note": "military claim"
+  },
+  {
+   "key": "market_sales_change",
+   "category": "conflict",
+   "label": "Market sales change since airstrike",
+   "value": -70,
+   "unit": "%",
+   "location": "Kyauktaw",
+   "observed_on": "2026-10-16",
+   "source": "DVB"
+  },
+  {
+   "key": "conscription_levy",
+   "category": "conflict",
+   "label": "Conscription levy",
+   "value": 100000,
+   "unit": "MMK per household",
+   "location": "Kyonpyaw",
+   "observed_on": "2026-11-02",
+   "source": "Khit Thit via Frontier",
+   "note": "single source"
+  },
+  {
+   "key": "conscription_levy_monthly",
+   "category": "conflict",
+   "label": "Conscription fee, monthly",
+   "value": 20000,
+   "unit": "MMK per household",
+   "location": "Myothit",
+   "observed_on": "2026-11-11",
+   "source": "Myaelatt Athan",
+   "note": "single source"
+  },
+  {
+   "key": "checkpoint_fee_person",
+   "category": "conflict",
+   "label": "Checkpoint fee per person moved",
+   "value": 100000,
+   "unit": "THB",
+   "location": "Shwe Kokko",
+   "observed_on": "2026-11-12",
+   "source": "Residents via DVB",
+   "note": "allegation; at least"
+  },
+  {
+   "key": "scam_repatriated",
+   "category": "conflict",
+   "label": "Foreigners repatriated from scam centres",
+   "value": 73085,
+   "unit": "people",
+   "location": "",
+   "observed_on": "2026-10-26",
+   "source": "Military MOFA via Eleven",
+   "note": "military claim"
+  }
+ ]
+}
