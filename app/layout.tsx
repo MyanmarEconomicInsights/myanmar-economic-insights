@@ -42,11 +42,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main><div className="wrap">{children}</div></main>
         <footer><div className="wrap">
           <p style={{ margin: '0 0 6px' }}>
-            {SITE_SHORT} is an AI-powered pilot project. Summaries are compiled with AI, with about 20–30% human review and editing.
+            {SITE_SHORT} is an AI-powered pilot project. Summaries are compiled with AI, with about 20–30% human review and editing. A Burmese (Myanmar-language) version is coming soon.
             Every figure is published with a named source and date; please check the original source before relying on it.
           </p>
           © {new Date().getFullYear()} {SITE_NAME} ({SITE_ALT_NAME}).
         </div></footer>
+        {/* Vercel Web Analytics (cookie-free visitor counts; enabled in the Vercel project) */}
+        <script defer src="/_vercel/insights/script.js" />
       </body>
     </html>
   );
