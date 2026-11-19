@@ -1,18 +1,16 @@
 import Link from 'next/link';
-import CategoryCard from '@/components/CategoryCard';
+import AreaHighlights from '@/components/AreaHighlights';
 import PostMeta, { periodLabel } from '@/components/PostMeta';
-import StatTiles from '@/components/StatTiles';
 import StatusBoard from '@/components/StatusBoard';
 import WeekTable from '@/components/WeekTable';
 import WeeklyChart from '@/components/WeeklyChart';
-import { CATEGORY_ORDER } from '@/lib/categories';
-import { getIndicatorSeries, getLatestByCategory, getPosts, getStatus, getTiles, getWeeklySeries } from '@/lib/data';
+import { getHighlights, getIndicatorSeries, getPosts, getStatus, getWeeklySeries } from '@/lib/data';
 
 export const revalidate = 300; // refresh at least every 5 minutes; new posts also refresh it instantly
 
 export default async function Home() {
-  const [latest, dailies, weeklies, tiles, kyatWeeks, official, trade, hotspots] = await Promise.all([
-    getLatestByCategory(), getPosts('daily', 8), getPosts('weekly', 8), getTiles(),
+  const [highlights, dailies, weeklies, kyatWeeks, official, trade, hotspots] = await Promise.all([
+    getHighlights(), getPosts('daily', 8), getPosts('weekly', 8),
     getWeeklySeries('mmk_usd_street'), getIndicatorSeries('mmk_usd_official'), getStatus('trade'), getStatus('hotspot'),
   ]);
   const today = dailies[0];
@@ -30,8 +28,8 @@ export default async function Home() {
         </div>
       )}
 
-      <p className="section-title">Key indicators</p>
-      <StatTiles tiles={tiles} />
+      <p className="section-title">Key indicators by area</p>
+      <AreaHighlights data={highlights} />
 
       <div className="grid">
         <section className="panel">
@@ -72,11 +70,6 @@ export default async function Home() {
       <div className="boards">
         <StatusBoard title="Trade routes and border gates" items={trade} />
         <StatusBoard title="Economic pressure points" items={hotspots} />
-      </div>
-
-      <p className="section-title">The five areas we track</p>
-      <div className="desks">
-        {CATEGORY_ORDER.map((k) => <CategoryCard key={k} k={k} entry={latest[k]} />)}
       </div>
 
       <section className="panel" style={{ marginTop: 24 }}>
