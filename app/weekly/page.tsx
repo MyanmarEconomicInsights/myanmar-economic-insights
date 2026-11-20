@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { periodLabel } from '@/components/PostMeta';
+import InFocusRail from '@/components/InFocusRail';
 import { getPosts } from '@/lib/data';
 
 export const revalidate = 300;
@@ -8,6 +9,7 @@ export const metadata = { title: 'Business Weekly' };
 export default async function Page() {
   const posts = await getPosts('weekly', 200);
   return (
+    <div className="grid">
     <div className="panel">
       <h1 style={{ marginTop: 0 }}>Business Weekly</h1>
       <p className="dek">The weekly issue: one headline number for each of the five categories.</p>
@@ -21,6 +23,8 @@ export default async function Page() {
         ))}
         {!posts.length && <li>Nothing published yet.</li>}
       </ul>
+    </div>
+    <aside><InFocusRail /></aside>
     </div>
   );
 }
