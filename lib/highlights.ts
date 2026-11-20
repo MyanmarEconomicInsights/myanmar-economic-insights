@@ -20,7 +20,7 @@ export const HIGHLIGHTS: Record<CategoryKey, HighlightDef[]> = {
   business: [
     { kind: 'figure', key: 'power_demand_met', label: 'Hot-season power demand met', upIsBad: false },
     { kind: 'figure', key: 'oil_wells_destroyed', location: 'Magway', label: 'Small oil wells destroyed, Magway', upIsBad: true },
-    { kind: 'figure', key: 'fdi_approved', label: 'Approved foreign investment, year to March 2026', upIsBad: false },
+    { kind: 'figure', key: 'garment_closure_applications', label: 'Garment factories applying to close this year (at least)', upIsBad: true },
   ],
   money: [
     { kind: 'figure', key: 'mmk_usd_street', label: 'Kyat per US$, street (DVB)', upIsBad: true },
