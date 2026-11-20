@@ -32,7 +32,8 @@ export default async function Home() {
       <p className="section-title">Key indicators by area</p>
       <AreaHighlights data={highlights} />
 
-      <div className="grid">
+      <div className="grid" style={{ alignItems: 'start' }}>
+        <div>
         <section className="panel">
           <p className="section-title" style={{ marginBottom: 2 }}>The kyat, week by week</p>
           <div className="kicker">Street rate per US dollar, last DVB reading of each week</div>
@@ -41,6 +42,16 @@ export default async function Home() {
             <p className="note">Official reference rate K{off.value.toLocaleString('en-US')} ({off.source}). The street rate is {Math.round((lastK.v / off.value - 1) * 100)}% higher. Other trackers are in <Link href="/data?cat=money">the data</Link>.</p>
           )}
         </section>
+            <section className="panel">
+              <p className="section-title">Daily summaries</p>
+              <ul className="list">
+                {dailies.slice(1, 5).map((p) => (
+                  <li key={p.slug}><div className="kicker">{periodLabel(p)}</div><Link href={`/p/${p.slug}`}>{p.title}</Link></li>
+                ))}
+                {dailies.length <= 1 && <li className="kicker">Daily summaries start soon.</li>}
+              </ul>
+            </section>
+        </div>
         <aside>
           <InFocusRail />
           {weekly && (
@@ -51,15 +62,6 @@ export default async function Home() {
               <Link className="more" href={`/p/${weekly.slug}`}>Read the issue →</Link>
             </section>
           )}
-          <section className="panel">
-            <p className="section-title">Daily summaries</p>
-            <ul className="list">
-              {dailies.slice(1, 5).map((p) => (
-                <li key={p.slug}><div className="kicker">{periodLabel(p)}</div><Link href={`/p/${p.slug}`}>{p.title}</Link></li>
-              ))}
-              {dailies.length <= 1 && <li className="kicker">Daily summaries start soon.</li>}
-            </ul>
-          </section>
         </aside>
       </div>
 
