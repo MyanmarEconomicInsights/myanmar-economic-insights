@@ -45,8 +45,12 @@ export default async function Home() {
             <section className="panel">
               <p className="section-title">Daily summaries</p>
               <ul className="list">
-                {dailies.slice(1, 5).map((p) => (
-                  <li key={p.slug}><div className="kicker">{periodLabel(p)}</div><Link href={`/p/${p.slug}`}>{p.title}</Link></li>
+                {dailies.slice(1, 4).map((p) => (
+                  <li key={p.slug}><div className="kicker">{periodLabel(p)}</div><Link href={`/p/${p.slug}`}>{p.title}</Link>
+                    {p.sections.length > 0 && (
+                      <ul className="mini">{p.sections.slice(0, 3).map((s, i) => <li key={i}>{s.value && <b>{s.value}</b>} {s.label}</li>)}</ul>
+                    )}
+                  </li>
                 ))}
                 {dailies.length <= 1 && <li className="kicker">Daily summaries start soon.</li>}
               </ul>
