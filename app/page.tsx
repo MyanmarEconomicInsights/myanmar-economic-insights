@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AreaHighlights from '@/components/AreaHighlights';
+import InFocusRail from '@/components/InFocusRail';
 import PostMeta, { periodLabel } from '@/components/PostMeta';
 import StatusBoard from '@/components/StatusBoard';
 import WeekTable from '@/components/WeekTable';
@@ -41,6 +42,7 @@ export default async function Home() {
           )}
         </section>
         <aside>
+          <InFocusRail />
           {weekly && (
             <section className="panel">
               <p className="section-title" style={{ marginBottom: 4 }}>Latest Business Weekly</p>
