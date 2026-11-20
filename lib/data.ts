@@ -131,6 +131,7 @@ export function formatFigure(i: Pick<Indicator, 'value' | 'unit' | 'note'>): { v
   switch (i.unit) {
     case 'MMK trillion': value = `K${n}tn`; break;
     case 'USD billion': value = `$${n}B`; break;
+    case 'USD million': value = `$${n}M`; break;
     case '%': value = `${n}%`; break;
     case 'THB': value = `${n} baht`; break;
     default: value = i.unit?.startsWith('MMK') ? `K${n}` : n;
