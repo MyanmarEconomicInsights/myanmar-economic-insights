@@ -193,3 +193,53 @@ function isoWeek(d: string): string {
   const wk = 1 + Math.round(((dt.getTime() - firstThu.getTime()) / 86400000 - 3 + ((firstThu.getUTCDay() + 6) % 7)) / 7);
   return `W${wk}`;
 }
+
+/* ---------- Days (Myanmar time) ---------- */
+
+/** Today's date in Myanmar time (UTC+6:30), YYYY-MM-DD. */
+export const mmtToday = () => new Date(Date.now() + 6.5 * 3600_000).toISOString().slice(0, 10);
+
+const addDays = (d: string, n: number) => {
+  const t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10);
+};
+
+/** Days that have something to show: a daily post (strong), or a weekly issue / tracked figure (light). */
+export async function getContentDays(): Promise<{ daily: string[]; other: string[] }> {
+  const posts = await getPosts(undefined, 400);
+  const daily = new Set<string>();
+  const other = new Set<string>();
+  for (const p of posts) {
+    const end = p.period_end ?? p.published_at.slice(0, 10);
+    if (p.kind === 'daily') { daily.add(end); continue; }
+    let d = p.period_start ?? end;
+    for (let i = 0; d <= end && i < 31; i++, d = addDays(d, 1)) other.add(d);
+  }
+  const db = supabaseRead();
+  if (db) {
+    const { data } = await db.from('monitor_indicators').select('observed_on').gte('observed_on', '2026-01-01').limit(5000);
+    for (const r of (data ?? []) as { observed_on: string }[]) other.add(r.observed_on);
+  } else for (const i of demoIndicators) other.add(i.observed_on);
+  for (const d of daily) other.delete(d);
+  return { daily: [...daily].sort(), other: [...other].sort() };
+}
+
+/** Everything dated to one Myanmar-time day: posts covering it, figures observed on it, status updates. */
+export async function getDay(date: string): Promise<{ posts: Post[]; indicators: Indicator[]; status: StatusItem[] }> {
+  const db = supabaseRead();
+  if (!db) {
+    const posts = demoPosts.filter((p) => (p.period_start ?? p.published_at.slice(0, 10)) <= date && (p.period_end ?? p.published_at.slice(0, 10)) >= date);
+    return { posts, indicators: demoIndicators.filter((i) => i.observed_on === date), status: demoStatus.filter((s) => s.as_of === date) };
+  }
+  const [p, i, s] = await Promise.all([
+    db.from('monitor_posts').select(POST_COLS).lte('period_start', date).gte('period_end', date).order('kind').limit(20),
+    db.from('monitor_indicators').select(IND_COLS).eq('observed_on', date).order('category').order('label').limit(500),
+    db.from('monitor_status').select('board,name,place,status,level,note,source,as_of,sort').eq('as_of', date),
+  ]);
+  if (p.error) console.error('getDay posts', p.error.message);
+  const posts = ((p.data ?? []) as Post[]).map(norm).sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'daily' ? -1 : 1));
+  return {
+    posts,
+    indicators: ((i.data ?? []) as Indicator[]).map((r) => ({ ...r, value: Number(r.value) })),
+    status: (s.data ?? []) as StatusItem[],
+  };
+}
