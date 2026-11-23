@@ -15,13 +15,20 @@ export async function getPosts(kind?: 'daily' | 'weekly', limit = 20): Promise<P
   const db = supabaseRead();
   if (!db) {
     return demoPosts.filter((p) => !kind || p.kind === kind)
-      .sort((a, b) => b.published_at.localeCompare(a.published_at)).slice(0, limit);
+      .sort(newestPost).slice(0, limit);
   }
-  let q = db.from('monitor_posts').select(POST_COLS).order('published_at', { ascending: false }).limit(limit);
+  let q = db.from('monitor_posts').select(POST_COLS)
+    .order('period_end', { ascending: false, nullsFirst: false }).order('published_at', { ascending: false }).limit(limit);
   if (kind) q = q.eq('kind', kind);
   const { data, error } = await q;
   if (error) { console.error('getPosts', error.message); return []; }
-  return ((data ?? []) as Post[]).map(norm);
+  return ((data ?? []) as Post[]).map(norm).sort(newestPost);
+}
+
+/** Newest first: by the last day a post covers, then by when it was published. */
+const postDate = (p: Post) => p.period_end ?? p.published_at.slice(0, 10);
+function newestPost(a: Post, b: Post) {
+  return postDate(b).localeCompare(postDate(a)) || b.published_at.localeCompare(a.published_at);
 }
 
 export async function getPost(slug: string): Promise<Post | null> {
@@ -79,7 +86,7 @@ export async function getLatestIndicators(category: CategoryKey): Promise<Indica
     const id = `${r.key}|${r.location}`;
     if (!seen.has(id)) seen.set(id, r);
   }
-  return [...seen.values()].sort((a, b) => a.label.localeCompare(b.label) || a.location.localeCompare(b.location));
+  return [...seen.values()].sort((a, b) => b.observed_on.localeCompare(a.observed_on) || a.label.localeCompare(b.label) || a.location.localeCompare(b.location));
 }
 
 /** All indicator observations, newest first (for the public data explorer). */
@@ -98,7 +105,7 @@ export async function getAllIndicators(limit = 5000): Promise<Indicator[]> {
   return out;
 }
 
-/** Status boards (trade routes, pressure points), ordered for display. */
+/** Status boards (trade routes, pressure points), newest first by as_of (the row's latest source date). */
 export async function getStatus(board: StatusItem['board']): Promise<StatusItem[]> {
   const db = supabaseRead();
   let rows: StatusItem[];
@@ -109,7 +116,7 @@ export async function getStatus(board: StatusItem['board']): Promise<StatusItem[
     if (error) { console.error('getStatus', error.message); return []; }
     rows = (data ?? []) as StatusItem[];
   }
-  return rows.sort((a, b) => (a.sort ?? 99) - (b.sort ?? 99) || a.name.localeCompare(b.name));
+  return rows.sort((a, b) => b.as_of.localeCompare(a.as_of) || (a.sort ?? 99) - (b.sort ?? 99) || a.name.localeCompare(b.name));
 }
 
 export interface Tile {
@@ -241,10 +248,10 @@ export async function getDay(date: string): Promise<{ posts: Post[]; indicators:
     db.from('monitor_status').select('board,name,place,status,level,note,source,as_of,sort').eq('as_of', date),
   ]);
   if (p.error) console.error('getDay posts', p.error.message);
-  const posts = ((p.data ?? []) as Post[]).map(norm).sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'daily' ? -1 : 1));
+  const posts = ((p.data ?? []) as Post[]).map(norm).sort((a, b) => (a.kind === b.kind ? newestPost(a, b) : a.kind === 'daily' ? -1 : 1));
   return {
     posts,
     indicators: ((i.data ?? []) as Indicator[]).map((r) => ({ ...r, value: Number(r.value) })),
-    status: (s.data ?? []) as StatusItem[],
+    status: ((s.data ?? []) as StatusItem[]).sort((a, b) => (a.sort ?? 99) - (b.sort ?? 99) || a.name.localeCompare(b.name)),
   };
 }
