@@ -1,6 +1,6 @@
 // Home-page "Key indicators": one card per area, each with up to 3 highlight figures.
 // An item is a tracked figure (latest value + change) or a row from a status board.
-// Cards show ONE line per item (Zaw, 23 Nov: "3 short lines for each category"): keep `short` to ~18 characters; `label` is the full hover text.
+// Cards (Option A, Zaw 23 Nov): 3 bullets per area — value + `label` (keep it to ~35 characters), then one small grey line. `short` is kept for compact uses.
 import type { CategoryKey } from './types';
 
 export type HighlightDef =
@@ -21,7 +21,7 @@ export const HIGHLIGHTS: Record<CategoryKey, HighlightDef[]> = {
   business: [
     { kind: 'figure', key: 'power_demand_met', label: 'Hot-season power demand met', short: 'Power demand met', upIsBad: false },
     { kind: 'figure', key: 'oil_wells_destroyed', location: 'Magway', label: 'Small oil wells destroyed, Magway', short: 'Oil wells destroyed', upIsBad: true },
-    { kind: 'figure', key: 'garment_closure_applications', label: 'Garment factories applying to close this year (at least)', short: 'Garment closures', upIsBad: true },
+    { kind: 'figure', key: 'garment_closure_applications', label: 'Garment factories applying to close (at least)', short: 'Garment closures', upIsBad: true },
   ],
   money: [
     { kind: 'figure', key: 'mmk_usd_street', label: 'Kyat per US$, street (DVB)', short: 'Street rate $', upIsBad: true },
@@ -29,8 +29,8 @@ export const HIGHLIGHTS: Record<CategoryKey, HighlightDef[]> = {
     { kind: 'figure', key: 'mmk_usd_remittance_banks', label: 'Kyat per US$, remittance (official)', short: 'Remittance rate $', upIsBad: false },
   ],
   conflict: [
-    { kind: 'figure', key: 'checkpoint_fee_person', location: 'Shwe Kokko', label: 'Checkpoint fee per person moved, Shwe Kokko', short: 'Shwe Kokko fee', upIsBad: true },
-    { kind: 'figure', key: 'conscription_levy', location: 'Kyonpyaw', label: 'Conscription levy a household, Kyonpyaw', short: 'Kyonpyaw levy', upIsBad: true },
+    { kind: 'figure', key: 'checkpoint_fee_person', location: 'Shwe Kokko', label: 'Shwe Kokko fee per person moved', short: 'Shwe Kokko fee', upIsBad: true },
+    { kind: 'figure', key: 'conscription_levy', location: 'Kyonpyaw', label: 'Conscription levy per household, Kyonpyaw', short: 'Kyonpyaw levy', upIsBad: true },
     { kind: 'figure', key: 'market_sales_change', location: 'Kyauktaw', label: 'Kyauktaw market sales since airstrike', short: 'Kyauktaw sales', upIsBad: false },
   ],
 };
