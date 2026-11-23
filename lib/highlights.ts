@@ -4,7 +4,9 @@ import type { CategoryKey } from './types';
 
 export type HighlightDef =
   | { kind: 'figure'; key: string; location?: string; label: string; upIsBad: boolean }
-  | { kind: 'status'; board: 'trade' | 'hotspot'; name: string };
+  | { kind: 'status'; board: 'trade' | 'hotspot'; name: string }
+  /** The most recently updated rows of a status board, so new reports show up without editing this file. */
+  | { kind: 'latest'; board: 'trade' | 'hotspot'; count: number };
 
 export const HIGHLIGHTS: Record<CategoryKey, HighlightDef[]> = {
   prices: [
@@ -13,9 +15,7 @@ export const HIGHLIGHTS: Record<CategoryKey, HighlightDef[]> = {
     { kind: 'figure', key: 'fertiliser', location: 'Rakhine', label: 'Fertiliser, Arakan, a sack', upIsBad: true },
   ],
   trade: [
-    { kind: 'status', board: 'trade', name: 'Kyauktaw–India route' },
-    { kind: 'status', board: 'trade', name: 'Myawaddy–Mae Sot' },
-    { kind: 'figure', key: 'palm_oil_permits', label: 'Palm-oil import permits', upIsBad: false },
+    { kind: 'latest', board: 'trade', count: 3 },
   ],
   business: [
     { kind: 'figure', key: 'power_demand_met', label: 'Hot-season power demand met', upIsBad: false },
