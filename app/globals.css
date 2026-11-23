@@ -288,20 +288,22 @@ table.weeks .wk span { font-size: 12px; color: var(--ink-3); }
 .fb-err { color: var(--bad-text); font-size: 14px; }
 .post-foot { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--ink-2); }
 
-/* Compact key-indicator cards: 3 one-line items per area (Zaw, 23 Nov) */
-.area { padding: 10px 12px; display: flex; flex-direction: column; }
-.area-head { margin-bottom: 2px; }
-.area li { flex-direction: row; align-items: baseline; gap: 6px; padding: 5px 0; min-width: 0; white-space: nowrap; }
-.area li:first-child { padding-top: 2px; }
-.area .area-val { font-size: 14.5px; flex: none; }
-.area .pill { flex: none; max-width: 62%; overflow: hidden; text-overflow: ellipsis; display: inline-block; font-size: 11.5px; padding: 0 7px; margin: 0; }
-.area .area-lbl { font-size: 12px; margin: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.area-chg { font-size: 11.5px; flex: none; }
-.area-ico { flex: none; font-size: 11px; width: 12px; text-align: center; }
+/* Key-indicator cards, Option A (Zaw, 23 Nov): 3 bullets per area — number + label, one small grey line under */
+.area { padding: 12px 14px; display: flex; flex-direction: column; }
+.area-head { margin-bottom: 4px; }
+.area li { display: block; position: relative; padding: 6px 0 6px 12px; font-size: 13.5px; line-height: 1.35; border-top: 1px solid #efede8; }
+.area li:first-child { border-top: 0; padding-top: 2px; }
+.area li::before { content: "•"; position: absolute; left: 0; color: #9a9da4; }
+.area li.is-status { padding-left: 0; }
+.area li.is-status::before { content: none; }
+.area .area-val { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.area .area-lbl { font-size: 13.5px; color: var(--ink); margin: 0; }
+.area .area-name { font-size: 14px; font-weight: 600; }
+.area-ico { font-size: 12px; margin-right: 5px; }
 .ico-open { color: var(--st-good); } .ico-restricted { color: #c98a00; } .ico-serious { color: var(--st-serious); } .ico-closed { color: var(--st-critical); }
-.area .area-name { color: var(--ink); font-size: 13px; font-weight: 600; }
-.area-chg.bad { color: var(--bad-text); }
-.area-chg.good { color: var(--good-text); }
-.area-more { margin-top: auto; padding-top: 4px; font-size: 11px; color: var(--ink-3); text-decoration: none; }
+.area-sub { display: block; font-size: 12px; color: var(--ink-3); margin-top: 1px; }
+.area-sub.bad { color: var(--bad-text); }
+.area-sub.good { color: var(--good-text); }
+.area-more { margin-top: auto; padding-top: 8px; font-size: 11.5px; color: var(--ink-3); text-decoration: none; }
 .area-more:hover { color: var(--accent); text-decoration: underline; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
