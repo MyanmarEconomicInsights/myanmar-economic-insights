@@ -142,7 +142,7 @@ export function formatFigure(i: Pick<Indicator, 'value' | 'unit' | 'note'>): { v
 }
 
 export interface Highlight {
-  label: string; value: string; date: string; source: string;
+  label: string; short?: string; value: string; date: string; source: string;
   change?: { pct: number; since: string; bad: boolean }; sub?: string;
   level?: StatusItem['level'];
 }
@@ -169,7 +169,7 @@ export async function getHighlights(): Promise<Record<CategoryKey, Highlight[]>>
       if (!last) continue;
       const first = series[0];
       const f = formatFigure(last);
-      const item: Highlight = { label: h.label, value: f.value, date: last.observed_on, source: last.source };
+      const item: Highlight = { label: h.label, short: h.short, value: f.value, date: last.observed_on, source: last.source };
       if (first && first !== last && first.value) {
         const pct = ((last.value - first.value) / first.value) * 100;
         item.change = { pct, since: first.observed_on, bad: h.upIsBad ? pct > 0 : pct < 0 };
