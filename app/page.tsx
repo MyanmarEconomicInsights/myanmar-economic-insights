@@ -1,18 +1,22 @@
 import Link from 'next/link';
 import AreaHighlights from '@/components/AreaHighlights';
+import PriceCompare from '@/components/PriceCompare';
+import RouteCompare from '@/components/RouteCompare';
 import InFocusRail from '@/components/InFocusRail';
 import PostMeta, { periodLabel } from '@/components/PostMeta';
 import StatusBoard from '@/components/StatusBoard';
 import WeekTable from '@/components/WeekTable';
 import WeeklyChart from '@/components/WeeklyChart';
+import { COMPARE_TOWN, getPriceCompare, getRouteCompare } from '@/lib/compare';
 import { getHighlights, getIndicatorSeries, getPosts, getStatus, getWeeklySeries } from '@/lib/data';
 
 export const revalidate = 300; // refresh at least every 5 minutes; new posts also refresh it instantly
 
 export default async function Home() {
-  const [highlights, dailies, weeklies, kyatWeeks, official, trade, hotspots] = await Promise.all([
+  const [highlights, dailies, weeklies, kyatWeeks, official, trade, hotspots, prices, routes] = await Promise.all([
     getHighlights(), getPosts('daily', 8), getPosts('weekly', 8),
     getWeeklySeries('mmk_usd_street'), getIndicatorSeries('mmk_usd_official'), getStatus('trade'), getStatus('hotspot'),
+    getPriceCompare(), getRouteCompare(),
   ]);
   const today = dailies[0];
   const weekly = weeklies[0];
@@ -32,16 +36,31 @@ export default async function Home() {
       <p className="section-title">Key indicators by area</p>
       <AreaHighlights data={highlights} />
 
-      <div className="grid" style={{ alignItems: 'start' }}>
-        <div>
-        <section className="panel">
+      <div className="trio">
+        <section className="panel" style={{ borderTop: '4px solid var(--cat-money)' }}>
           <p className="section-title" style={{ marginBottom: 2 }}>The kyat, week by week</p>
           <div className="kicker">Street rate per US dollar, last DVB reading of each week</div>
-          <WeeklyChart points={kyatWeeks} unit="MMK per USD" prefix="K" />
+          <WeeklyChart points={kyatWeeks} unit="MMK per USD" prefix="K" width={380} />
           {off && lastK && (
             <p className="note">Official reference rate K{off.value.toLocaleString('en-US')} ({off.source}). The street rate is {Math.round((lastK.v / off.value - 1) * 100)}% higher. Other trackers are in <Link href="/data?cat=money">the data</Link>.</p>
           )}
         </section>
+        <section className="panel" style={{ borderTop: '4px solid var(--cat-prices)' }}>
+          <p className="section-title" style={{ marginBottom: 2 }}>Prices: Yangon vs {COMPARE_TOWN}</p>
+          <div className="kicker">Latest reading of each item; each pair has its own scale</div>
+          <PriceCompare rows={prices} town={COMPARE_TOWN} />
+          <p className="note">Becomes week-by-week lines once each item has enough weekly readings. <Link href="/data?cat=prices">All prices →</Link></p>
+        </section>
+        <section className="panel" style={{ borderTop: '4px solid var(--cat-trade)' }}>
+          <p className="section-title" style={{ marginBottom: 2 }}>Border and sea routes</p>
+          <div className="kicker">Status now vs 4 weeks ago</div>
+          <RouteCompare rows={routes.rows} since={routes.since} />
+          <p className="note">“No data” means no dated, named source yet.</p>
+        </section>
+      </div>
+
+      <div className="grid" style={{ alignItems: 'start', marginTop: 24 }}>
+        <div>
             <section className="panel">
               <p className="section-title">Daily summaries</p>
               <ul className="list">
