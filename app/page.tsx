@@ -48,14 +48,14 @@ export default async function Home() {
         <section className="panel" style={{ borderTop: '4px solid var(--cat-prices)' }}>
           <p className="section-title" style={{ marginBottom: 2 }}>Prices: Yangon vs {COMPARE_TOWN}</p>
           <div className="kicker">Latest reading of each item; each pair has its own scale</div>
-          <PriceCompare rows={prices} town={COMPARE_TOWN} />
-          <p className="note">Becomes week-by-week lines once each item has enough weekly readings. <Link href="/data?cat=prices">All prices →</Link></p>
+          <PriceCompare rows={prices.slice(0, 3)} town={COMPARE_TOWN} />
+          <Link className="more" href="/c/prices">All prices and places →</Link>
         </section>
         <section className="panel" style={{ borderTop: '4px solid var(--cat-trade)' }}>
           <p className="section-title" style={{ marginBottom: 2 }}>Border and sea routes</p>
           <div className="kicker">Status now vs 4 weeks ago</div>
-          <RouteCompare rows={routes.rows} since={routes.since} />
-          <p className="note">“No data” means no dated, named source yet.</p>
+          <RouteCompare rows={routes.rows.filter((r) => r.now).slice(0, 3)} since={routes.since} />
+          <Link className="more" href="#routes">All routes and border gates →</Link>
         </section>
       </div>
 
@@ -94,7 +94,7 @@ export default async function Home() {
         <Link className="more" href="/weekly">All issues →</Link>
       </section>
 
-      <div className="boards">
+      <div className="boards" id="routes">
         <StatusBoard title="Trade routes and border gates" items={trade} />
         <StatusBoard title="Economic pressure points" items={hotspots} />
       </div>
