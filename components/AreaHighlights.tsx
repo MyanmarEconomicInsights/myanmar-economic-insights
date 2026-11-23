@@ -7,9 +7,6 @@ import { shortDate } from './util';
 
 const ICON: Record<StatusLevel, string> = { open: '●', restricted: '◐', serious: '▲', closed: '■' };
 
-/** Ranges shortened for the one-line card: K280,000–400,000 → K280k–400k (full value stays in the tooltip). */
-const compact = (v: string) => (/[–-]/.test(v) ? v.replace(/(\d+),000\b/g, '$1k') : v);
-
 /** Full detail for the hover tooltip (and screen readers), so the card itself stays one short item per line. */
 const detail = (h: Highlight) => [
   `${h.label}: ${h.value}`,
@@ -17,7 +14,7 @@ const detail = (h: Highlight) => [
   `Source: ${h.source}${h.date ? `, ${shortDate(h.date)}` : ''}`,
 ].filter(Boolean).join(' · ');
 
-/** Key indicators: one compact card per area, 3 one-line items each. Hover an item for its source; the category page has the detail. */
+/** Key indicators: one compact card per area, 3 bullets each (Zaw chose Option A, 23 Nov): number + label, then one small grey line (change, note, or source). Hover for the full source. */
 export default function AreaHighlights({ data }: { data: Record<CategoryKey, Highlight[]> }) {
   return (
     <div className="areas">
@@ -26,24 +23,25 @@ export default function AreaHighlights({ data }: { data: Record<CategoryKey, Hig
           <Link href={`/c/${CATEGORIES[k].slug}`} className="area-head"><CategoryTag k={k} short /></Link>
           <ul>
             {data[k].slice(0, 3).map((h) => (
-              <li key={h.label} title={detail(h)}>
+              <li key={h.label} title={detail(h)} className={h.level ? 'is-status' : undefined}>
                 {h.level ? (
                   <>
                     <span className={`area-ico ico-${h.level}`} aria-hidden>{ICON[h.level]}</span>
-                    <span className="area-lbl area-name">{h.label}</span>
+                    <b className="area-name">{h.label}</b>
+                    <span className="area-sub">{h.value}</span>
                   </>
                 ) : (
                   <>
-                    <b className="area-val">{compact(h.value)}</b>
-                    {h.change && Math.round(h.change.pct) !== 0 && (
-                      <span className={`area-chg ${h.change.bad ? 'bad' : 'good'}`}>
-                        <span aria-hidden>{h.change.pct >= 0 ? '↑' : '↓'}</span>{Math.abs(h.change.pct).toFixed(0)}%
+                    <b className="area-val">{h.value}</b> <span className="area-lbl">{h.label}</span>
+                    {h.change && Math.round(h.change.pct) !== 0 ? (
+                      <span className={`area-sub ${h.change.bad ? 'bad' : 'good'}`}>
+                        <span aria-hidden>{h.change.pct >= 0 ? '↑' : '↓'}</span> {Math.abs(h.change.pct).toFixed(0)}% since {shortDate(h.change.since)}
                       </span>
+                    ) : (
+                      <span className="area-sub">{h.sub ?? `${h.source}${h.date ? `, ${shortDate(h.date)}` : ''}`}</span>
                     )}
-                    <span className="area-lbl">{h.short ?? h.label}</span>
                   </>
                 )}
-                <span className="sr-only">{detail(h)}</span>
               </li>
             ))}
             {!data[k].length && <li className="area-lbl">No sourced figure yet.</li>}
