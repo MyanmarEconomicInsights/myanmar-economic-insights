@@ -94,3 +94,40 @@ create table if not exists public.monitor_feedback (
 );
 create index if not exists monitor_feedback_ip_time_idx on public.monitor_feedback (ip_hash, created_at desc);
 alter table public.monitor_feedback enable row level security;
+
+-- Status history: every change to a status-board row is kept here (one row per board + name + as_of),
+-- so the home page can show "now vs 4 weeks ago". Filled automatically by a trigger on monitor_status.
+create table if not exists public.monitor_status_history (
+  id       bigserial primary key,
+  board    text not null,
+  name     text not null,
+  place    text not null default '',
+  status   text not null,
+  level    text not null,
+  note     text,
+  source   text not null,
+  as_of    date not null,
+  recorded_at timestamptz not null default now(),
+  unique (board, name, as_of)
+);
+alter table public.monitor_status_history enable row level security;
+drop policy if exists "public read status history" on public.monitor_status_history;
+create policy "public read status history" on public.monitor_status_history for select using (true);
+
+create or replace function public.monitor_status_log() returns trigger language plpgsql as $$
+begin
+  insert into public.monitor_status_history (board, name, place, status, level, note, source, as_of)
+  values (new.board, new.name, new.place, new.status, new.level, new.note, new.source, new.as_of)
+  on conflict (board, name, as_of) do update
+    set place = excluded.place, status = excluded.status, level = excluded.level,
+        note = excluded.note, source = excluded.source, recorded_at = now();
+  return new;
+end $$;
+drop trigger if exists monitor_status_log on public.monitor_status;
+create trigger monitor_status_log after insert or update on public.monitor_status
+  for each row execute function public.monitor_status_log();
+
+-- One-off seed from the rows already on the boards.
+insert into public.monitor_status_history (board, name, place, status, level, note, source, as_of)
+select board, name, place, status, level, note, source, as_of from public.monitor_status
+on conflict (board, name, as_of) do nothing;
