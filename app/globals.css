@@ -253,3 +253,37 @@ table.weeks .wk span { font-size: 12px; color: var(--ink-3); }
 .focus-fig b { color: var(--ink); }
 .list .mini { list-style: disc; margin: 6px 0 0; padding-left: 18px; font-size: 14px; color: var(--ink-2); }
 .list .mini li { border-top: 0; padding: 2px 0; }
+
+/* Day picker (Myanmar time) */
+.daypick { font-size: 14px; }
+.daypick-clock { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
+.daypick-clock b { font-size: 16px; font-variant-numeric: tabular-nums; }
+.daypick-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; font-weight: 600; }
+.daypick-head button { font: inherit; font-size: 18px; line-height: 1; width: 32px; height: 32px; border: 1px solid var(--rule); background: var(--card); border-radius: 8px; cursor: pointer; color: var(--ink-2); }
+.daypick-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.daypick-grid th { font-size: 11px; font-weight: 600; color: var(--ink-3); padding: 4px 0; text-align: center; }
+.daypick-grid td { padding: 2px; text-align: center; }
+.daypick-grid a, .daypick-grid span { display: flex; align-items: center; justify-content: center; height: 32px; border-radius: 7px; font-variant-numeric: tabular-nums; text-decoration: none; }
+.daypick-grid .empty { color: #b7b8bd; }
+.daypick-grid .has-daily { background: var(--ink); color: #fff; font-weight: 600; }
+.daypick-grid .has-other { background: #ecebe5; color: var(--ink); }
+.daypick-grid a:hover { outline: 2px solid var(--accent); }
+.daypick-grid .today { box-shadow: inset 0 0 0 2px var(--accent); }
+.daypick-grid .sel { outline: 2px solid var(--accent); outline-offset: 1px; }
+.daypick-key { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; font-size: 12px; color: var(--ink-3); }
+.daypick-key i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 4px; }
+.daypick-key .k-daily { background: var(--ink); }
+.daypick-key .k-other { background: #ecebe5; border: 1px solid var(--rule); }
+.daypick-key .k-today { box-shadow: inset 0 0 0 2px var(--accent); }
+
+/* Feedback form */
+.fb-form { display: flex; flex-direction: column; gap: 14px; max-width: 620px; }
+.fb-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600; }
+.fb-form label span { font-weight: 400; color: var(--ink-3); font-size: 13px; }
+.fb-form select, .fb-form input, .fb-form textarea { font: inherit; font-weight: 400; padding: 9px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); color: var(--ink); }
+.fb-form textarea { min-height: 150px; resize: vertical; }
+.fb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.fb-warn { background: #fff6dd; border: 1px solid #f0dfa8; border-radius: 8px; padding: 10px 12px; font-size: 14px; }
+.fb-ok { background: #e7f6e7; border: 1px solid #b6e0b6; border-radius: 8px; padding: 10px 12px; }
+.fb-err { color: var(--bad-text); font-size: 14px; }
+.post-foot { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--ink-2); }
