@@ -154,6 +154,11 @@ export async function getHighlights(): Promise<Record<CategoryKey, Highlight[]>>
   for (const cat of CATEGORY_ORDER) {
     const items: Highlight[] = [];
     for (const h of HIGHLIGHTS[cat]) {
+      if (h.kind === 'latest') {
+        const rows = [...boards[h.board]].sort((a, b) => b.as_of.localeCompare(a.as_of) || (a.sort ?? 99) - (b.sort ?? 99)).slice(0, h.count);
+        for (const s of rows) items.push({ label: s.name, value: s.status, date: '', source: s.source, sub: s.note ?? undefined, level: s.level });
+        continue;
+      }
       if (h.kind === 'status') {
         const s = boards[h.board].find((x) => x.name === h.name);
         if (s) items.push({ label: s.name, value: s.status, date: '', source: s.source, sub: s.note ?? undefined, level: s.level });
