@@ -46,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {SITE_SHORT} is an AI-powered pilot project. Summaries are compiled with AI, with about 20–30% human review and editing. A Burmese (Myanmar-language) version is coming soon.
             Every figure is published with a named source and date; please check the original source before relying on it.
           </p>
+          <p style={{ margin: '0 0 6px' }}><Link href="/feedback">Suggest a topic or report an error</Link></p>
           © {new Date().getFullYear()} {SITE_NAME} ({SITE_ALT_NAME}).
         </div></footer>
         {/* Vercel Web Analytics (cookie-free visitor counts; enabled in the Vercel project) */}
