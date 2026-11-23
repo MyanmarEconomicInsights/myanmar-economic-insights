@@ -71,7 +71,7 @@ export default async function Home() {
 
       <section className="panel" style={{ marginTop: 24 }}>
         <p className="section-title">Week by week: the headline number in each area</p>
-        <WeekTable posts={weeklies} />
+        <WeekTable posts={weeklies.slice(0, 3)} />
         <Link className="more" href="/weekly">All issues →</Link>
       </section>
 
