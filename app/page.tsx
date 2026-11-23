@@ -74,9 +74,6 @@ export default async function Home() {
                 {dailies.length <= 1 && <li className="kicker">Daily summaries start soon.</li>}
               </ul>
             </section>
-        </div>
-        <aside>
-          <InFocusRail />
           {weekly && (
             <section className="panel">
               <p className="section-title" style={{ marginBottom: 4 }}>Latest Business Weekly</p>
@@ -85,6 +82,9 @@ export default async function Home() {
               <Link className="more" href={`/p/${weekly.slug}`}>Read the issue →</Link>
             </section>
           )}
+        </div>
+        <aside>
+          <InFocusRail />
         </aside>
       </div>
 
