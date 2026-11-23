@@ -80,3 +80,17 @@ create table if not exists public.monitor_status (
 alter table public.monitor_status enable row level security;
 drop policy if exists "public read status" on public.monitor_status;
 create policy "public read status" on public.monitor_status for select using (true);
+
+-- Reader feedback ("Suggest or correct"). Written only by the server (/api/feedback, service-role key).
+-- RLS is on with NO policies, so the public can neither read nor write this table directly.
+create table if not exists public.monitor_feedback (
+  id         bigserial primary key,
+  kind       text not null default 'other' check (kind in ('topic','error','other')),
+  message    text not null check (char_length(message) between 3 and 4000),
+  email      text,
+  post_slug  text,
+  ip_hash    text,
+  created_at timestamptz not null default now()
+);
+create index if not exists monitor_feedback_ip_time_idx on public.monitor_feedback (ip_hash, created_at desc);
+alter table public.monitor_feedback enable row level security;
