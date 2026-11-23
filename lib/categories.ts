@@ -8,8 +8,8 @@ export const CATEGORIES: Record<CategoryKey, { name: string; short: string; slug
   },
   trade: {
     name: 'Trade & Supply Chain', short: 'Trade', slug: 'trade',
-    about: 'Are goods moving? Border gates open, restricted or closed, and what is coming in from China, Thailand and India.',
-    tracks: ['Border gate status (Muse, Myawaddy, Tamu, Ranong and others)', 'Imports and exports, shortages in city markets', 'Road closures, trucking and armed-group taxation of trade'],
+    about: 'Are goods moving? Border gates open, restricted or closed, sea ports and coastal shipping, and what is coming in from China, Thailand, India and Bangladesh.',
+    tracks: ['Border gate status (Muse, Myawaddy, Tamu, Ranong, Maungdaw–Teknaf and others)', 'Sea routes: Yangon port terminals incl. Thilawa, Sittwe, Kyaukphyu, Kawthaung–Ranong and coastal shipping', 'Imports and exports, shortages in city markets', 'Road closures, trucking and armed-group taxation of trade'],
   },
   business: {
     name: 'Business Climate', short: 'Business', slug: 'business',
@@ -22,9 +22,9 @@ export const CATEGORIES: Record<CategoryKey, { name: string; short: string; slug
     tracks: ['Official vs street exchange rate', 'ATM cash, mobile money limits, hundi and crypto', 'Remittances and the 25% conversion rule'],
   },
   conflict: {
-    name: 'Conflict & Illicit Economy', short: 'Conflict', slug: 'conflict',
-    about: 'The conflict is the business environment: checkpoint taxes, market shutdowns, drugs and scam centres, in kyat and dollar terms.',
-    tracks: ['Checkpoint and multiple taxation by armed actors', 'Market shutdowns and abandoned farmland', 'Drug seizures and scam centres, valued in USD/MMK'],
+    name: 'Conflict & Illicit Activities', short: 'Conflict', slug: 'conflict',
+    about: 'The conflict is the business environment: checkpoint taxes and household levies, blockades, market shutdowns, the cost of the war, and illicit activity such as drugs and scam centres, in kyat and dollar terms.',
+    tracks: ['Checkpoint fees, household levies and multiple taxation by armed actors', 'Blockades, market shutdowns and abandoned farmland', 'Drugs, scam centres and other illicit activity, valued in USD/MMK (deeper coverage in In Focus)'],
   },
 };
 
