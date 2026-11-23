@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from '@/components/Markdown';
 import PostMeta from '@/components/PostMeta';
@@ -48,6 +49,10 @@ export default async function PostPage({ params }: Props) {
           </ul>
         </>
       )}
+      <p className="post-foot">
+        Spotted an error? <Link href={`/feedback?type=error&post=${post.slug}`}>Report it</Link>
+        {post.kind === 'daily' && post.period_end && <> · <Link href={`/day/${post.period_end}`}>Everything from this day</Link></>}
+      </p>
     </article>
   );
 }
