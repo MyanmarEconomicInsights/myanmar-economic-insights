@@ -13,7 +13,7 @@ type Tab = 'figures' | 'updates';
 type Dir = 'asc' | 'desc';
 const PAGE = 50;
 
-const fmtDate = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const fmtDate = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 const plain = (md: string) => md.replace(/[*_`#>]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
 
 function csvEsc(v: unknown) {
