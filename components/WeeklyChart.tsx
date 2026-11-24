@@ -33,6 +33,11 @@ export default function WeeklyChart({ points, unit, prefix = '', width = W_FULL 
     xy.forEach(([a], i) => { if (Math.abs(a - px) < Math.abs(xy[best][0] - px)) best = i; });
     setHover(best);
   }
+  // Week labels: always show the last one, then walk back and skip any that would overlap the label to their right.
+  const showLabel = points.map(() => false);
+  for (let i = points.length - 1, right = Infinity; i >= 0; i--) {
+    if (right - xy[i][0] >= 44) { showLabel[i] = true; right = xy[i][0]; }
+  }
   const h = hover != null ? xy[hover] : null;
   const last = points.length - 1;
 
@@ -47,7 +52,7 @@ export default function WeeklyChart({ points, unit, prefix = '', width = W_FULL 
             <text x={PAD.l - 8} y={y(v) + 4} fontSize="11" fill="var(--ink-3)" textAnchor="end">{fmt(v)}</text>
           </g>
         ))}
-        {points.map((p, i) => (
+        {points.map((p, i) => showLabel[i] && (
           <g key={p.week}>
             <text x={x(i)} y={H - PAD.b + 16} fontSize="11" fill="var(--ink-2)" textAnchor="middle">{p.week}</text>
             <text x={x(i)} y={H - PAD.b + 30} fontSize="10" fill="var(--ink-3)" textAnchor="middle">{fmtDate(p.d)}</text>
