@@ -23,7 +23,7 @@ export default function DayPicker({ daily, other, selected }: { daily: string[];
   const cells: (number | null)[] = [...Array(lead).fill(null), ...Array.from({ length: nDays }, (_, i) => i + 1)];
   while (cells.length % 7) cells.push(null);
   const shift = (n: number) => setYm(({ y, m }) => { const d = new Date(Date.UTC(y, m + n, 1)); return { y: d.getUTCFullYear(), m: d.getUTCMonth() }; });
-  const clock = now?.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+  const clock = now?.toLocaleString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
 
   return (
     <div className="daypick">
@@ -50,8 +50,8 @@ export default function DayPicker({ daily, other, selected }: { daily: string[];
                 return (
                   <td key={i}>
                     {dailySet.has(iso) || otherSet.has(iso)
-                      ? <Link href={`/day/${iso}`} className={cls} aria-label={`${d} ${MONTHS[ym.m]}: ${label}`}>{d}</Link>
-                      : <span className={cls} aria-label={`${d} ${MONTHS[ym.m]}: ${label}`}>{d}</span>}
+                      ? <Link href={`/day/${iso}`} className={cls} aria-label={`${MONTHS[ym.m]} ${d}: ${label}`}>{d}</Link>
+                      : <span className={cls} aria-label={`${MONTHS[ym.m]} ${d}: ${label}`}>{d}</span>}
                   </td>
                 );
               })}
