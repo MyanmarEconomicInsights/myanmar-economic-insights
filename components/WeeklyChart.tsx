@@ -4,7 +4,7 @@ import { useState } from 'react';
 type Pt = { week: string; d: string; v: number };
 
 const W_FULL = 640, H = 220, PAD = { l: 52, r: 16, t: 16, b: 40 };
-const fmtDate = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const fmtDate = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { day: 'numeric', month: 'short', timeZone: 'UTC' });
 
 /** Week-by-week line (one point per week) with a value axis, hover tooltip and a table view. */
 export default function WeeklyChart({ points, unit, prefix = '', width = W_FULL }: { points: Pt[]; unit: string; prefix?: string; width?: number }) {
