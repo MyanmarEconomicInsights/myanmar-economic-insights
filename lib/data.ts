@@ -112,7 +112,7 @@ export async function getStatus(board: StatusItem['board']): Promise<StatusItem[
   if (!db) rows = demoStatus.filter((s) => s.board === board);
   else {
     const { data, error } = await db.from('monitor_status')
-      .select('board,name,place,status,level,note,source,as_of,sort').eq('board', board);
+      .select('board,name,place,status,level,note,source,source_url,as_of,sort').eq('board', board);
     if (error) { console.error('getStatus', error.message); return []; }
     rows = (data ?? []) as StatusItem[];
   }
@@ -245,7 +245,7 @@ export async function getDay(date: string): Promise<{ posts: Post[]; indicators:
   const [p, i, s] = await Promise.all([
     db.from('monitor_posts').select(POST_COLS).lte('period_start', date).gte('period_end', date).order('kind').limit(20),
     db.from('monitor_indicators').select(IND_COLS).eq('observed_on', date).order('category').order('label').limit(500),
-    db.from('monitor_status').select('board,name,place,status,level,note,source,as_of,sort').eq('as_of', date),
+    db.from('monitor_status').select('board,name,place,status,level,note,source,source_url,as_of,sort').eq('as_of', date),
   ]);
   if (p.error) console.error('getDay posts', p.error.message);
   const posts = ((p.data ?? []) as Post[]).map(norm).sort((a, b) => (a.kind === b.kind ? newestPost(a, b) : a.kind === 'daily' ? -1 : 1));
