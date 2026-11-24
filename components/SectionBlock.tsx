@@ -3,6 +3,7 @@ import { CATEGORIES } from '@/lib/categories';
 import type { Section } from '@/lib/types';
 import CategoryTag from './CategoryTag';
 import Markdown from './Markdown';
+import SourceLink from './SourceLink';
 
 export default function SectionBlock({ s }: { s: Section }) {
   return (
@@ -15,7 +16,7 @@ export default function SectionBlock({ s }: { s: Section }) {
         <div className="sec-num"><b>{s.value}</b> <span>{s.label}</span></div>
       )}
       <Markdown>{s.text_md}</Markdown>
-      {s.source && <div className="src">Source: {s.source}</div>}
+      {s.source && <div className="src">Source: <SourceLink name={s.source} url={s.source_url} /></div>}
     </section>
   );
 }
