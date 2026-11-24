@@ -4,9 +4,10 @@ import CategoryTag from '@/components/CategoryTag';
 import IndicatorTable from '@/components/IndicatorTable';
 import KyatPanel from '@/components/KyatPanel';
 import Markdown from '@/components/Markdown';
+import StatusBoard from '@/components/StatusBoard';
 import { periodLabel } from '@/components/PostMeta';
 import { CATEGORIES, CATEGORY_ORDER, isCategory } from '@/lib/categories';
-import { getLatestIndicators, getSectionEntries } from '@/lib/data';
+import { getLatestIndicators, getSectionEntries, getStatus } from '@/lib/data';
 
 export const revalidate = 300;
 export const dynamicParams = false;
@@ -26,7 +27,8 @@ export default async function CategoryPage({ params }: Props) {
   const { key } = await params;
   if (!isCategory(key)) notFound();
   const c = CATEGORIES[key];
-  const [entries, figures] = await Promise.all([getSectionEntries(200), getLatestIndicators(key)]);
+  const board = key === 'trade' ? 'trade' : key === 'conflict' ? 'hotspot' : null;
+  const [entries, figures, status] = await Promise.all([getSectionEntries(200), getLatestIndicators(key), board ? getStatus(board) : Promise.resolve([])]);
   const mine = entries.filter((e) => e.category === key);
 
   return (
@@ -41,6 +43,12 @@ export default async function CategoryPage({ params }: Props) {
         <p className="dek">{c.about}</p>
         <ul className="tracks">{c.tracks.map((t) => <li key={t}>{t}</li>)}</ul>
       </header>
+
+      {status.length > 0 && (
+        <div style={{ marginBottom: 24 }}>
+          <StatusBoard id="board" title={key === 'trade' ? 'Trade routes and border gates' : 'Economic pressure points'} items={status} />
+        </div>
+      )}
 
       <section className="panel" style={{ marginBottom: 24 }}>
         <p className="section-title">Latest tracked figures</p>
