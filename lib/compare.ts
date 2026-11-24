@@ -5,36 +5,51 @@ import type { Indicator, StatusItem } from './types';
 
 /* ---------- Prices: Yangon vs a conflict-affected town ---------- */
 
-export const COMPARE_TOWN = 'Sittwe';
+/** Conflict-affected towns compared with Yangon (Zaw, 24 Nov: this pool for 2026–27; can change). */
+export const COMPARE_TOWNS = ['Sittwe', 'Myitkyina', 'Lashio', 'Hpa-An', 'Monywa', 'Kalay'];
 
-/** Basket items compared on the home page. Each side names the tracked series (key + location) it reads. */
-export const PRICE_COMPARE: { label: string; note?: string; a: { key: string; location: string }; b: { key: string; location: string } }[] = [
-  { label: 'Rice', note: 'coarse', a: { key: 'rice_coarse', location: 'Yangon' }, b: { key: 'rice', location: COMPARE_TOWN } },
-  { label: 'Onions', a: { key: 'onions', location: 'Yangon' }, b: { key: 'onions', location: COMPARE_TOWN } },
-  { label: 'Fuel', note: 'Octane 92', a: { key: 'octane_92', location: 'Yangon' }, b: { key: 'octane_92', location: COMPARE_TOWN } },
-  { label: 'Cooking oil', a: { key: 'palm_oil', location: 'Yangon' }, b: { key: 'cooking_oil', location: COMPARE_TOWN } },
+/** The town changes twice a week, on Monday and Thursday (Myanmar time), in the order above, starting Mon 23 Nov 2026. */
+export function rotationIndex(today: string): number {
+  const days = Math.floor((Date.parse(today + 'T00:00:00Z') - Date.parse('2026-11-23T00:00:00Z')) / 86400000);
+  const slots = Math.floor(days / 7) * 2 + (((days % 7) + 7) % 7 >= 3 ? 1 : 0);
+  return ((slots % COMPARE_TOWNS.length) + COMPARE_TOWNS.length) % COMPARE_TOWNS.length;
+}
+
+/** Basket items compared on the home page: Yangon series key, and the key used for each conflict town. */
+export const PRICE_COMPARE: { label: string; note?: string; a: { key: string; location: string }; townKey: string }[] = [
+  { label: 'Rice', note: 'coarse', a: { key: 'rice_coarse', location: 'Yangon' }, townKey: 'rice' },
+  { label: 'Onions', a: { key: 'onions', location: 'Yangon' }, townKey: 'onions' },
+  { label: 'Fuel', note: 'Octane 92', a: { key: 'octane_92', location: 'Yangon' }, townKey: 'octane_92' },
+  { label: 'Cooking oil', a: { key: 'palm_oil', location: 'Yangon' }, townKey: 'cooking_oil' },
 ];
 
 export interface PriceSide { place: string; value: number; unit: string | null; date: string; source: string }
 export interface PriceRow { label: string; note?: string; a?: PriceSide; b?: PriceSide }
 
-export async function getPriceCompare(): Promise<PriceRow[]> {
-  const sides = PRICE_COMPARE.flatMap((p) => [p.a, p.b]);
-  const keys = [...new Set(sides.map((s) => s.key))];
+/** Yangon vs this slot's town. If that town has fewer than 2 of the first 3 items priced, the next town in the pool is used. */
+export async function getPriceCompare(): Promise<{ town: string; rows: PriceRow[] }> {
+  const keys = [...new Set(PRICE_COMPARE.flatMap((p) => [p.a.key, p.townKey]))];
   let rows: Indicator[];
   const db = supabaseRead();
   if (!db) rows = demoIndicators.filter((i) => keys.includes(i.key));
   else {
     const { data, error } = await db.from('monitor_indicators')
       .select('key,label,value,unit,location,observed_on,source').in('key', keys).order('observed_on', { ascending: false }).limit(500);
-    if (error) { console.error('getPriceCompare', error.message); return []; }
+    if (error) { console.error('getPriceCompare', error.message); return { town: COMPARE_TOWNS[0], rows: [] }; }
     rows = ((data ?? []) as Indicator[]).map((r) => ({ ...r, value: Number(r.value) }));
   }
   const latest = (s: { key: string; location: string }): PriceSide | undefined => {
     const r = rows.filter((x) => x.key === s.key && x.location === s.location).sort((x, y) => y.observed_on.localeCompare(x.observed_on))[0];
     return r && { place: s.location, value: r.value, unit: r.unit, date: r.observed_on, source: r.source };
   };
-  return PRICE_COMPARE.map((p) => ({ label: p.label, note: p.note, a: latest(p.a), b: latest(p.b) }));
+  const build = (town: string) => PRICE_COMPARE.map((p) => ({ label: p.label, note: p.note, a: latest(p.a), b: latest({ key: p.townKey, location: town }) }));
+  const start = rotationIndex(mmtToday());
+  for (let k = 0; k < COMPARE_TOWNS.length; k++) {
+    const town = COMPARE_TOWNS[(start + k) % COMPARE_TOWNS.length];
+    const rows = build(town);
+    if (rows.slice(0, 3).filter((r) => r.b).length >= 2) return { town, rows };
+  }
+  return { town: COMPARE_TOWNS[0], rows: build(COMPARE_TOWNS[0]) };
 }
 
 /* ---------- Border and sea routes: now vs 4 weeks ago ---------- */
