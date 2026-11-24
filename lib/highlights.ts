@@ -29,8 +29,7 @@ export const HIGHLIGHTS: Record<CategoryKey, HighlightDef[]> = {
     { kind: 'figure', key: 'mmk_usd_remittance_banks', label: 'Kyat per US$, remittance (official)', short: 'Remittance rate $', upIsBad: false },
   ],
   conflict: [
-    { kind: 'figure', key: 'checkpoint_fee_person', location: 'Shwe Kokko', label: 'Shwe Kokko fee per person moved', short: 'Shwe Kokko fee', upIsBad: true },
-    { kind: 'figure', key: 'conscription_levy', location: 'Kyonpyaw', label: 'Conscription levy per household, Kyonpyaw', short: 'Kyonpyaw levy', upIsBad: true },
-    { kind: 'figure', key: 'market_sales_change', location: 'Kyauktaw', label: 'Kyauktaw market sales since airstrike', short: 'Kyauktaw sales', upIsBad: false },
+    // the 3 newest rows of the "Economic pressure points" board, so new conflict news shows up automatically
+    { kind: 'latest', board: 'hotspot', count: 3 },
   ],
 };
