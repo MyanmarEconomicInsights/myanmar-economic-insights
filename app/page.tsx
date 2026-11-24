@@ -7,7 +7,7 @@ import PostMeta, { periodLabel } from '@/components/PostMeta';
 import StatusBoard from '@/components/StatusBoard';
 import WeekTable from '@/components/WeekTable';
 import WeeklyChart from '@/components/WeeklyChart';
-import { COMPARE_TOWN, getPriceCompare, getRouteCompare } from '@/lib/compare';
+import { getPriceCompare, getRouteCompare } from '@/lib/compare';
 import { getHighlights, getIndicatorSeries, getPosts, getStatus, getWeeklySeries } from '@/lib/data';
 
 export const revalidate = 300; // refresh at least every 5 minutes; new posts also refresh it instantly
@@ -46,9 +46,9 @@ export default async function Home() {
           )}
         </section>
         <section className="panel" style={{ borderTop: '4px solid var(--cat-prices)' }}>
-          <p className="section-title" style={{ marginBottom: 2 }}>Prices: Yangon vs {COMPARE_TOWN}</p>
+          <p className="section-title" style={{ marginBottom: 2 }}>Prices: Yangon vs {prices.town}</p>
           <div className="kicker">Latest reading of each item; each pair has its own scale</div>
-          <PriceCompare rows={prices.slice(0, 3)} town={COMPARE_TOWN} />
+          <PriceCompare rows={prices.rows.slice(0, 3)} town={prices.town} />
           <Link className="more" href="/c/prices">All prices and places →</Link>
         </section>
         <section className="panel" style={{ borderTop: '4px solid var(--cat-trade)' }}>
