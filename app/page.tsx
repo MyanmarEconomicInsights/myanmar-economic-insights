@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AreaHighlights from '@/components/AreaHighlights';
+import DayPicker from '@/components/DayPicker';
 import PriceCompare from '@/components/PriceCompare';
 import RouteCompare from '@/components/RouteCompare';
 import InFocusRail from '@/components/InFocusRail';
@@ -9,15 +10,15 @@ import StatusBoard from '@/components/StatusBoard';
 import WeekTable from '@/components/WeekTable';
 import WeeklyChart from '@/components/WeeklyChart';
 import { getPriceCompare, getRouteCompare } from '@/lib/compare';
-import { getHighlights, getIndicatorSeries, getPosts, getStatus, getWeeklySeries } from '@/lib/data';
+import { getContentDays, getHighlights, getIndicatorSeries, getPosts, getStatus, getWeeklySeries } from '@/lib/data';
 
 export const revalidate = 300; // refresh at least every 5 minutes; new posts also refresh it instantly
 
 export default async function Home() {
-  const [highlights, dailies, weeklies, kyatWeeks, official, trade, hotspots, prices, routes] = await Promise.all([
+  const [highlights, dailies, weeklies, kyatWeeks, official, trade, hotspots, prices, routes, days] = await Promise.all([
     getHighlights(), getPosts('daily', 8), getPosts('weekly', 8),
     getWeeklySeries('mmk_usd_street'), getIndicatorSeries('mmk_usd_official'), getStatus('trade'), getStatus('hotspot'),
-    getPriceCompare(), getRouteCompare(),
+    getPriceCompare(), getRouteCompare(), getContentDays(),
   ]);
   const today = dailies[0];
   const weekly = weeklies[0];
@@ -88,6 +89,11 @@ export default async function Home() {
         </div>
         <aside>
           <InFocusRail />
+          <section className="panel">
+            <p className="section-title">Pick a day</p>
+            <DayPicker daily={days.daily} other={days.other} />
+            <p className="note">Dark days have a daily summary; light days have a weekly issue or new figures. Dates are Myanmar time. <Link href="/daily">All daily summaries →</Link></p>
+          </section>
         </aside>
       </div>
 
