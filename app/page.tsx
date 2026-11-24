@@ -3,6 +3,7 @@ import AreaHighlights from '@/components/AreaHighlights';
 import PriceCompare from '@/components/PriceCompare';
 import RouteCompare from '@/components/RouteCompare';
 import InFocusRail from '@/components/InFocusRail';
+import InformalPanel from '@/components/InformalPanel';
 import PostMeta, { periodLabel } from '@/components/PostMeta';
 import StatusBoard from '@/components/StatusBoard';
 import WeekTable from '@/components/WeekTable';
@@ -83,6 +84,7 @@ export default async function Home() {
               <Link className="more" href={`/p/${weekly.slug}`}>Read the issue →</Link>
             </section>
           )}
+          <InformalPanel />
         </div>
         <aside>
           <InFocusRail />
