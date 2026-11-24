@@ -34,7 +34,7 @@ export interface FocusItem {
 }
 
 export const byDate = (a: FocusItem, b: FocusItem) => (b.published_on ?? '').localeCompare(a.published_on ?? '');
-export const fmtDate = (d: string | null) => d ? new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '';
+export const fmtDate = (d: string | null) => d ? new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '';
 
 /** Key figures and outside reports for the In Focus pages (table monitor_focus). */
 export async function getFocusItems(topic?: FocusKey): Promise<FocusItem[]> {
