@@ -4,7 +4,7 @@ import { useState } from 'react';
 type Pt = { d: string; v: number };
 
 const W = 320, H = 120, PAD = { l: 4, r: 4, t: 10, b: 18 };
-const fmtDate = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const fmtDate = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { day: 'numeric', month: 'short', timeZone: 'UTC' });
 
 /** Single-series line chart of the street rate with hover tooltip and a table view. */
 export default function RateChart({ points, unit }: { points: Pt[]; unit: string }) {
