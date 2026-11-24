@@ -4,6 +4,7 @@ import CategoryTag from '@/components/CategoryTag';
 import IndicatorTable from '@/components/IndicatorTable';
 import KyatPanel from '@/components/KyatPanel';
 import Markdown from '@/components/Markdown';
+import SourceLink from '@/components/SourceLink';
 import StatusBoard from '@/components/StatusBoard';
 import { periodLabel } from '@/components/PostMeta';
 import { CATEGORIES, CATEGORY_ORDER, isCategory } from '@/lib/categories';
@@ -66,7 +67,7 @@ export default async function CategoryPage({ params }: Props) {
                   <div className="kicker">{e.post.kind === 'weekly' ? 'Business Weekly' : 'Daily'} · {periodLabel(e.post)}</div>
                   {(e.value || e.label) && <div className="sec-num"><b>{e.value}</b> <span>{e.label}</span></div>}
                   <Markdown>{e.text_md}</Markdown>
-                  <div className="src">{e.source && <>{e.source} · </>}<Link href={`/p/${e.post.slug}`}>Full summary →</Link></div>
+                  <div className="src">{e.source && <><SourceLink name={e.source} url={e.source_url} /> · </>}<Link href={`/p/${e.post.slug}`}>Full summary →</Link></div>
                 </li>
               ))}
               {!mine.length && <li className="kicker">No updates in this category yet.</li>}
