@@ -56,7 +56,7 @@ export default async function Home() {
           <p className="section-title" style={{ marginBottom: 2 }}>Border and sea routes</p>
           <div className="kicker">Status now vs 4 weeks ago</div>
           <RouteCompare rows={routes.rows.filter((r) => r.now).slice(0, 3)} since={routes.since} />
-          <Link className="more" href="#routes">All routes and border gates →</Link>
+          <Link className="more" href="/c/trade#board">All routes and border gates →</Link>
         </section>
       </div>
 
@@ -98,8 +98,8 @@ export default async function Home() {
       </section>
 
       <div className="boards" id="routes">
-        <StatusBoard title="Trade routes and border gates" items={trade} />
-        <StatusBoard title="Economic pressure points" items={hotspots} />
+        <StatusBoard title="Trade routes and border gates" items={trade} limit={4} moreHref="/c/trade#board" moreLabel="All routes and gates" />
+        <StatusBoard title="Economic pressure points" items={hotspots} limit={4} moreHref="/c/conflict#board" moreLabel="All pressure points" />
       </div>
 
       <section className="panel" style={{ marginTop: 24 }}>
