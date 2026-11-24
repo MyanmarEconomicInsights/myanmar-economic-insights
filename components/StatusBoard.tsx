@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { StatusItem, StatusLevel } from '@/lib/types';
+import SourceLink from './SourceLink';
 import { shortDate } from './util';
 
 const ICON: Record<StatusLevel, string> = { open: '●', restricted: '◐', serious: '▲', closed: '■' };
@@ -23,7 +24,7 @@ export default function StatusBoard({ title, items, limit, moreHref, moreLabel, 
             </div>
             <div className="board-side">
               <span className={`pill pill-${i.level}`}><span aria-hidden>{ICON[i.level]}</span> {i.status}</span>
-              <span className="board-src">{i.source}</span>
+              <span className="board-src"><SourceLink name={i.source} url={i.source_url} /></span>
             </div>
           </li>
         ))}
