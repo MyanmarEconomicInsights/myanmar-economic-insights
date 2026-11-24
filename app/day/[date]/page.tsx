@@ -5,6 +5,7 @@ import IndicatorTable from '@/components/IndicatorTable';
 import { periodLabel } from '@/components/PostMeta';
 import SectionBlock from '@/components/SectionBlock';
 import { getContentDays, getDay } from '@/lib/data';
+import SourceLink from '@/components/SourceLink';
 
 export const revalidate = 300;
 
@@ -78,7 +79,7 @@ export default async function DayPage({ params }: Props) {
                 <li key={s.board + s.name}>
                   <b>{s.name}</b> <span className={`pill pill-${s.level}`}><span aria-hidden>{ICON[s.level]}</span> {s.status}</span>
                   {s.note && <div className="board-note">{s.note}</div>}
-                  <div className="src">Source: {s.source}</div>
+                  <div className="src">Source: <SourceLink name={s.source} url={s.source_url} /></div>
                 </li>
               ))}
             </ul>
