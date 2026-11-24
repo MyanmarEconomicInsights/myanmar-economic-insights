@@ -7,6 +7,7 @@ export interface Section {
   label?: string;     // what the number means, one line
   text_md: string;    // 2–3 sentences or bullets (Markdown)
   source?: string;    // named source + date for the number
+  source_url?: string; // link to the original article, when known
 }
 
 export interface SourceRef { name: string; url?: string; date?: string }
@@ -47,6 +48,7 @@ export interface StatusItem {
   level: StatusLevel;    // drives the pill colour
   note?: string | null;  // one short line
   source: string;        // named source + date
+  source_url?: string | null; // link to the original article, when known
   as_of: string;         // YYYY-MM-DD
   sort?: number;
 }
