@@ -2,17 +2,18 @@ import Link from 'next/link';
 import { periodLabel } from '@/components/PostMeta';
 import InFocusRail from '@/components/InFocusRail';
 import { getPosts } from '@/lib/data';
+import { getT } from '@/lib/i18n';
 
 export const revalidate = 300;
 export const metadata = { title: 'Business Weekly' };
 
 export default async function Page() {
-  const posts = await getPosts('weekly', 200);
+  const [posts, t] = await Promise.all([getPosts('weekly', 200), getT()]);
   return (
     <div className="grid">
     <div className="panel">
-      <h1 style={{ marginTop: 0 }}>Business Weekly</h1>
-      <p className="dek">The weekly issue: one headline number for each of the five categories.</p>
+      <h1 style={{ marginTop: 0 }}>{t.business_weekly}</h1>
+      <p className="dek">{t.weekly_dek}</p>
       <ul className="list">
         {posts.map((p) => (
           <li key={p.slug}>
@@ -21,7 +22,7 @@ export default async function Page() {
             {p.dek && <div className="dek" style={{ margin: '4px 0 0' }}>{p.dek}</div>}
           </li>
         ))}
-        {!posts.length && <li>Nothing published yet.</li>}
+        {!posts.length && <li>{t.nothing_yet}</li>}
       </ul>
     </div>
     <aside><InFocusRail /></aside>
