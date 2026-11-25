@@ -1,19 +1,21 @@
 import Link from 'next/link';
 import { CATEGORY_ORDER, CATEGORIES } from '@/lib/categories';
 import type { Post } from '@/lib/types';
+import { CAT_MY, getT } from '@/lib/i18n';
 import { shortDate } from './util';
 
 /** Week by week: one row per Business Weekly issue, one column per area (its headline number). */
-export default function WeekTable({ posts }: { posts: Post[] }) {
+export default async function WeekTable({ posts }: { posts: Post[] }) {
   if (!posts.length) return null;
+  const t = await getT();
   return (
     <div className="table-wrap">
       <table className="weeks">
         <thead>
           <tr>
-            <th>Week</th>
+            <th>{t.week}</th>
             {CATEGORY_ORDER.map((k) => (
-              <th key={k}><span className="sw" style={{ background: `var(--cat-${k})` }} aria-hidden /> {CATEGORIES[k].short}</th>
+              <th key={k}><span className="sw" style={{ background: `var(--cat-${k})` }} aria-hidden /> {t.lang === 'my' ? CAT_MY[k].short : CATEGORIES[k].short}</th>
             ))}
           </tr>
         </thead>
