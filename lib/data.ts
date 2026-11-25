@@ -1,6 +1,7 @@
 import { CATEGORY_ORDER } from './categories';
 import { demoIndicators, demoPosts, demoStatus } from './demo';
 import { HIGHLIGHTS } from './highlights';
+import { getLang } from './i18n';
 import { hasSupabase, supabaseRead } from './supabase';
 import type { CategoryKey, Indicator, Post, Section, StatusItem } from './types';
 
@@ -8,6 +9,54 @@ const POST_COLS = 'slug,kind,title,dek,body_md,sections,sources,period_start,per
 const IND_COLS = 'key,category,label,value,unit,location,observed_on,source,source_url,note';
 
 export const isDemo = !hasSupabase;
+
+/* ---------- Burmese translations (table monitor_i18n; Beta, Nov 2026) ---------- */
+
+type TrData = Record<string, unknown> & { sections?: { category: string; value?: string; label?: string; text_md?: string }[] };
+
+/** Translations for the current language (only Burmese is stored). Empty map for English or on any error. */
+async function trMap(kind: 'post' | 'status', refs: string[]): Promise<Map<string, TrData>> {
+  if (!refs.length || (await getLang()) !== 'my') return new Map();
+  const db = supabaseRead();
+  if (!db) return new Map();
+  const { data, error } = await db.from('monitor_i18n').select('ref,data').eq('kind', kind).eq('lang', 'my').in('ref', refs);
+  if (error) { console.error('monitor_i18n', error.message); return new Map(); }
+  return new Map(((data ?? []) as { ref: string; data: TrData }[]).map((r) => [r.ref, r.data]));
+}
+
+const str = (v: unknown) => (typeof v === 'string' && v ? v : undefined);
+
+/** Overlay Burmese title, dek and section text; numbers, sources and links stay as published. Sets `translated`. */
+async function trPosts(posts: Post[]): Promise<Post[]> {
+  const m = await trMap('post', posts.map((p) => p.slug));
+  if (!m.size) return posts;
+  return posts.map((p) => {
+    const t = m.get(p.slug);
+    if (!t) return p;
+    return {
+      ...p, title: str(t.title) ?? p.title, dek: str(t.dek) ?? p.dek, translated: true,
+      sections: p.sections.map((s) => {
+        const ts = t.sections?.find((x) => x.category === s.category);
+        return ts ? { ...s, value: ts.value || s.value, label: ts.label || s.label, text_md: ts.text_md || s.text_md } : s;
+      }),
+    } as Post;
+  });
+}
+
+async function trStatus(rows: StatusItem[]): Promise<StatusItem[]> {
+  const m = await trMap('status', rows.map((r) => `${r.board}|${r.name}`));
+  if (!m.size) return rows;
+  return rows.map((r) => {
+    const t = m.get(`${r.board}|${r.name}`);
+    return t ? { ...r, name_en: r.name, name: str(t.name) ?? r.name, place: str(t.place) ?? r.place, status: str(t.status) ?? r.status, note: str(t.note) ?? r.note } as StatusItem : r;
+  });
+}
+
+/** Status text for given status-board rows, in the current language (used by the route panel). */
+export async function statusText(board: StatusItem['board'], names: string[]): Promise<Map<string, { name?: string; status?: string }>> {
+  const m = await trMap('status', names.map((n) => `${board}|${n}`));
+  return new Map([...m.entries()].map(([k, v]) => [k.slice(board.length + 1), { name: str(v.name), status: str(v.status) }]));
+}
 
 const norm = (p: Post): Post => ({ ...p, sections: Array.isArray(p.sections) ? p.sections : [], sources: Array.isArray(p.sources) ? p.sources : [] });
 
@@ -22,7 +71,7 @@ export async function getPosts(kind?: 'daily' | 'weekly', limit = 20): Promise<P
   if (kind) q = q.eq('kind', kind);
   const { data, error } = await q;
   if (error) { console.error('getPosts', error.message); return []; }
-  return ((data ?? []) as Post[]).map(norm).sort(newestPost);
+  return trPosts(((data ?? []) as Post[]).map(norm).sort(newestPost));
 }
 
 /** Newest first: by the last day a post covers, then by when it was published. */
@@ -36,7 +85,7 @@ export async function getPost(slug: string): Promise<Post | null> {
   if (!db) return demoPosts.find((p) => p.slug === slug) ?? null;
   const { data, error } = await db.from('monitor_posts').select(POST_COLS).eq('slug', slug).maybeSingle();
   if (error) { console.error('getPost', error.message); return null; }
-  return data ? norm(data as Post) : null;
+  return data ? (await trPosts([norm(data as Post)]))[0] : null;
 }
 
 export type SectionEntry = Section & { post: Pick<Post, 'slug' | 'kind' | 'title' | 'period_start' | 'period_end' | 'published_at'> };
@@ -116,7 +165,8 @@ export async function getStatus(board: StatusItem['board']): Promise<StatusItem[
     if (error) { console.error('getStatus', error.message); return []; }
     rows = (data ?? []) as StatusItem[];
   }
-  return rows.sort((a, b) => b.as_of.localeCompare(a.as_of) || (a.sort ?? 99) - (b.sort ?? 99) || a.name.localeCompare(b.name));
+  rows.sort((a, b) => b.as_of.localeCompare(a.as_of) || (a.sort ?? 99) - (b.sort ?? 99) || a.name.localeCompare(b.name));
+  return trStatus(rows);
 }
 
 export interface Tile {
@@ -167,7 +217,7 @@ export async function getHighlights(): Promise<Record<CategoryKey, Highlight[]>>
         continue;
       }
       if (h.kind === 'status') {
-        const s = boards[h.board].find((x) => x.name === h.name);
+        const s = boards[h.board].find((x) => x.name === h.name || (x as StatusItem & { name_en?: string }).name_en === h.name);
         if (s) items.push({ label: s.name, value: s.status, date: '', source: s.source, sub: s.note ?? undefined, level: s.level });
         continue;
       }
@@ -248,7 +298,7 @@ export async function getDay(date: string): Promise<{ posts: Post[]; indicators:
     db.from('monitor_status').select('board,name,place,status,level,note,source,source_url,as_of,sort').eq('as_of', date),
   ]);
   if (p.error) console.error('getDay posts', p.error.message);
-  const posts = ((p.data ?? []) as Post[]).map(norm).sort((a, b) => (a.kind === b.kind ? newestPost(a, b) : a.kind === 'daily' ? -1 : 1));
+  const posts = await trPosts(((p.data ?? []) as Post[]).map(norm).sort((a, b) => (a.kind === b.kind ? newestPost(a, b) : a.kind === 'daily' ? -1 : 1)));
   return {
     posts,
     indicators: ((i.data ?? []) as Indicator[]).map((r) => ({ ...r, value: Number(r.value) })),
