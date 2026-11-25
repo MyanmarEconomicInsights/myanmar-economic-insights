@@ -5,6 +5,7 @@ import PostMeta from '@/components/PostMeta';
 import SectionBlock from '@/components/SectionBlock';
 import CategoryTag from '@/components/CategoryTag';
 import { getPost } from '@/lib/data';
+import { getT } from '@/lib/i18n';
 
 export const revalidate = 300;
 
@@ -18,8 +19,11 @@ export async function generateMetadata({ params }: Props) {
 export default async function PostPage({ params }: Props) {
   const post = await getPost((await params).slug);
   if (!post) notFound();
+  const t = await getT();
+  const untranslated = t.lang === 'my' && !(post as { translated?: boolean }).translated;
   return (
     <article className="panel lead" style={{ maxWidth: 780, margin: '0 auto' }}>
+      {untranslated && <p className="pill pill-nd" lang="my">{t.english_only}</p>}
       <PostMeta post={post} />
       <h1>{post.title}</h1>
       {post.dek && <p className="dek">{post.dek}</p>}
@@ -38,7 +42,7 @@ export default async function PostPage({ params }: Props) {
       {post.sections.map((s) => <div key={s.category} id={s.category}><SectionBlock s={s} /></div>)}
       {post.sources.length > 0 && (
         <>
-          <p className="section-title" style={{ marginTop: 24 }}>Sources</p>
+          <p className="section-title" style={{ marginTop: 24 }}>{t.sources}</p>
           <ul className="sources">
             {post.sources.map((s, i) => (
               <li key={i}>
@@ -50,8 +54,8 @@ export default async function PostPage({ params }: Props) {
         </>
       )}
       <p className="post-foot">
-        Spotted an error? <Link href={`/feedback?type=error&post=${post.slug}`}>Report it</Link>
-        {post.kind === 'daily' && post.period_end && <> · <Link href={`/day/${post.period_end}`}>Everything from this day</Link></>}
+        {t.spotted} <Link href={`/feedback?type=error&post=${post.slug}`}>{t.report_it}</Link>
+        {post.kind === 'daily' && post.period_end && <> · <Link href={`/day/${post.period_end}`}>{t.everything_day}</Link></>}
       </p>
     </article>
   );
