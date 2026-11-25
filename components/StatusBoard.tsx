@@ -1,19 +1,21 @@
 import Link from 'next/link';
 import type { StatusItem, StatusLevel } from '@/lib/types';
+import { getT } from '@/lib/i18n';
 import SourceLink from './SourceLink';
 import { shortDate } from './util';
 
 const ICON: Record<StatusLevel, string> = { open: '●', restricted: '◐', serious: '▲', closed: '■' };
 
 /** A list of places with a coloured status pill. The pill always carries text + an icon, never colour alone. */
-export default function StatusBoard({ title, items, limit, moreHref, moreLabel, id }: {
+export default async function StatusBoard({ title, items, limit, moreHref, moreLabel, id }: {
   title: string; items: StatusItem[]; limit?: number; moreHref?: string; moreLabel?: string; id?: string;
 }) {
   if (!items.length) return null;
+  const t = await getT();
   const latest = items.map((i) => i.as_of).sort().at(-1)!;
   return (
     <section className="board" id={id}>
-      <p className="section-title">{title} <span className="board-asof">· updated {shortDate(latest)}</span></p>
+      <p className="section-title">{title} <span className="board-asof">· {t.updated} {shortDate(latest)}</span></p>
       <ul className="board-list">
         {items.slice(0, limit ?? items.length).map((i) => (
           <li key={i.name}>
@@ -30,7 +32,7 @@ export default function StatusBoard({ title, items, limit, moreHref, moreLabel, 
         ))}
       </ul>
       {moreHref && limit != null && items.length > limit && (
-        <Link className="more" href={moreHref}>{moreLabel ?? 'See all'} ({items.length}) →</Link>
+        <Link className="more" href={moreHref}>{moreLabel ?? t.see_all} ({items.length}) →</Link>
       )}
     </section>
   );
